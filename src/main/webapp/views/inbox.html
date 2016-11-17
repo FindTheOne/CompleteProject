@@ -1,0 +1,8 @@
+<div class="container" ng-repeat="x in message">
+	<p ng-if= "user1 != x.to" align="right">
+		{{user1}} : {{x.text}}
+	</p>
+	<p ng-if= "user2 != x.to" align="left">
+		{{user2}} : {{x.text}}
+	</p>
+</div>

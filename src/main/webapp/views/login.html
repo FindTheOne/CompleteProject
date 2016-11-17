@@ -1,0 +1,31 @@
+
+
+<div class="container">
+
+  <form class="form-signin" name="myform"
+    novalidate 
+    ng-submit="login()">
+
+    <h2 class="form-signin-heading">Please sign in</h2>
+
+    <fieldset>
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input type="email" name="email" id="inputEmail"
+      ng-model="user.email" ng-required="true"
+      class="form-control" placeholder="Email address">
+      <p class="error validationerror"
+      ng-show="myform.email.$invalid && myform.email.$touched">
+      Must be a valid email address
+      </p>
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" name="password" id="inputPassword" placeholder="Password"
+      ng-model="user.password" ng-required="true"
+      class="form-control" placeholder="Password">
+      <p class="error validationerror"
+      ng-show="myform.password.$invalid && myform.password.$touched">Password can't be empty</p>
+    </fieldset>
+
+    <button type="submit" class="btn btn-lg btn-primary btn-block" ng-disabled="myform.$invalid">Login</button>
+    <p>or <a href="#/register">register</a></p>
+  </form>
+</div>

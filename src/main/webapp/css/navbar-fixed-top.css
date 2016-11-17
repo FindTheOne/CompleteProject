@@ -1,0 +1,71 @@
+body {
+  padding-top: 70px;
+}
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.course-title {
+    padding: 30px 5px;
+    margin: 0px;
+    text-align: center;
+    font-size: x-large;
+    background-color: #e6e6e6;
+}
+.course-intro {
+    text-align: center;
+    color: #330000;
+    padding: 10px;
+    border: 1px solid #e6e6e6;
+}
+.course-intro .course-name, .tutor-intro .tutor-name {
+    font-weight: bold;
+}
+
+.tutor-card{
+  text-align: center;
+  padding-top: 10px;
+  border: 1px solid #e6e6e6;
+}
+.tutor-intro {
+    text-align: center;
+    background-color: #e6e6e6;
+    color: #330000;
+    padding: 10px;
+    //border: 1px solid #e6e6e6;
+}
+.tutor-image {
+  border-radius: 50%;
+  width: 50%;
+  border: 1px solid #e6e6e6;
+}
