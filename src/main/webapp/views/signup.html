@@ -1,0 +1,15 @@
+<div class="container">
+	<form ng-submit="submitDetails()">
+		Username: <input type="text" ng-model="form.username" /><br /> <br />
+		emailId: <input type="email" ng-model="form.emailID" /><br /> <br />
+		Password: <input type="text" ng-model="form.password" /><br /> <br />
+		Skills: <input type="textarea" ng-model="form.skills" /><br /> <br />
+		interests: <input type="textarea" ng-model="form.interests" /><br />
+		<br /> firends: <input type="textarea" ng-model="form.friends" /><br />
+		<br /> <input type="submit" value="submit" />
+	</form>
+</div>
+<div ng-show="message">
+	<p ng-if="message.status == 200">User Created</p>
+	<p ng-if="message.status != 200">Oops, error..try again!</p>
+</div>

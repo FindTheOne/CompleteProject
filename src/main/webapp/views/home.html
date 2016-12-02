@@ -1,111 +1,104 @@
 <div class="container">
-<!-- Header -->
-<div class="page-header">
-	<div class="media">
-  		<div class="media-left">
-    		<a href="#">
-      			<img class="media-object img-circle" src="images/batman.png" alt="batman" style="height:25%;">
-    		</a>
-  		</div>
-		<div class="media-body media-middle">
-    		<h3 class="media-heading">Lets learn something new today</h3>
-  		</div>
+	<!-- Header -->
+	<div class="page-header">
+		<div class="media">
+			<div class="media-left">
+				<a href="#"> <img class="media-object img-circle"
+					src="{{baseURLImages}}/{{currentUser}}.jpg"
+					alt="{{currentUser | capitalize}}"
+					style="height: 90px; width: 70px">
+				</a>
+			</div>
+			<div class="media-body media-middle">
+				<h3 class="media-heading">{{currentUser | capitalize}}, Let's
+					learn something new today !!</h3>
+			</div>
+		</div>
 	</div>
+		
+	<!-- Find-The-One Feed -->
+	
+	<div class="panel panel-default" ng-hide="feed.length"><center><h1><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></h1></center></div>
+	<div class="panel panel-default" ng-show="feed.length">
+		<!-- Default panel contents -->
+		<div class="panel-heading">Find-The-One Feed</div>
+		<div class="panel-body">
+			<div class="row">
+
+				<div class="col-sm-6 col-md-3 carousel" ng-repeat="x in feed">
+					<div class="tutor-card">
+						<p class="image-cropper-large">
+							<a ng-href='/#/profile/{{x.teacher}}'><img class="my-picture"
+								src="{{baseURLImages}}/{{x.teacher}}.jpg"
+								alt="{{tutor | capitalize}}"> </a>
+						</p>
+						<div class="tutor-intro">
+							<p class="tutor-name">{{x.teacher | capitalize}}</p>
+							<p>
+								Your friend, <b>{{x.student | capitalize}}</b>, learnt <b>{{x.subject}}</b>
+								from <b>{{x.teacher | capitalize}}</b> at <b>{{x.location}}</b>
+							</p>
+							<p>
+								<a ng-href='/#/profile/{{x.teacher}}' class="btn btn-default"
+									role="button">View {{x.teacher | capitalize}}'s Profile</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Find-The-One Feed -->
+
+	<!-- Course Recommendation Panel-->
+	<div class="panel panel-default" ng-hide="courseSubjects.length"><center><h1><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></h1></center></div>
+	<div class="panel panel-default" ng-show="courseSubjects.length">
+	
+		<!-- Default panel contents -->
+		<div class="panel-heading">Course Recommendation</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-6 col-md-3" ng-repeat="x in courseSubjects">
+					<p class="course-title">{{x.name}}</p>
+					<div class="course-intro">
+						<p class="course-name">{{x.fullName}}</p>
+						<p>{{x.description}}</p>
+						<p>
+							<a href="#" class="btn btn-default" role="button">Learn</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Course Recommendation Panel-->
+
+	<!-- Tutor Recommendation Panel-->
+	<div class="panel panel-default" ng-hide="tutors.length"><center><h1><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></h1></center></div>
+	<div class="panel panel-default" ng-show="tutors.length">
+		<!-- Default panel contents -->
+		<div class="panel-heading">Tutor Recommendation</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-6 col-md-3" ng-repeat="x in tutors">
+					<p class="course-title">{{x.courseName}}</p>
+					<div class="course-intro">
+						<div ng-show="x.tutors.length" ng-repeat="tutor in x.tutors"
+							style="display: inline-block;">
+							<div class="image-cropper-small">
+								<a ng-href='/#/profile/{{tutor}}'><img class="my-picture"
+									src="{{baseURLImages}}/{{tutor}}.jpg"
+									alt="{{tutor | capitalize}}"> </a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Tutor Recommendation Panel-->
+
+
 </div>
 
-<!-- Teacher Recommendation Panel-->
-<div class="panel panel-default">
-  <!-- Default panel contents -->
-	<div class="panel-heading">Tutor Recommendation</div>
-  	<div class="panel-body">
-		<div class="row">
-			<div class="col-sm-6 col-md-3">
-    			<div class= "tutor-card">
-    				<p><img class="tutor-image" src="images/hulk.png" alt="batman"></p>
-    				<div class="tutor-intro">
-       				<p class="tutor-name">Dr. Hulk</p>
-       				<p>This class is for introducing cloud computing technologies</p>
-       				<p><a href="#" class="btn btn-default" role="button">Learn</a></p>
-    				</div>
-    			</div>
-  			</div>
-			<div class="col-sm-6 col-md-3">
-    			<div class= "tutor-card">
-    				<p><img class="tutor-image" src="images/captain.png" alt="batman"></p>
-    				<div class="tutor-intro">
-       				<p class="tutor-name">Captain America</p>
-       				<p>This class is for introducing cloud computing technologies</p>
-       				<p><a href="#" class="btn btn-default" role="button">Learn</a></p>
-    				</div>
-    			</div>
-  			</div>
-  			<div class="col-sm-6 col-md-3">
-    			<div class= "tutor-card">
-    				<p><img class="tutor-image" src="images/ironman.png" alt="batman"></p>
-    				<div class="tutor-intro">
-       				<p class="tutor-name">Er. Ironman</p>
-       				<p>This class is for introducing cloud computing technologies</p>
-       				<p><a href="#" class="btn btn-default" role="button">Learn</a></p>
-    				</div>
-    			</div>
-  			</div><div class="col-sm-6 col-md-3">
-    			<div class= "tutor-card">
-    				<p><img class="tutor-image" src="images/vision.png" alt="batman"></p>
-    				<div class="tutor-intro">
-       				<p class="tutor-name">Mr. Vision</p>
-       				<p>This class is for introducing cloud computing technologies</p>
-       				<p><a href="#" class="btn btn-default" role="button">Learn</a></p>
-    				</div>
-    			</div>
-  			</div>
-		</div>
-  	</div>
-</div> <!-- Teacher Recommendation Panel-->
-
-<!-- Course Recommendation Panel-->
-<div class="panel panel-default">
-  <!-- Default panel contents -->
-	<div class="panel-heading">Course Recommendation</div>
-  	<div class="panel-body">
-		<div class="row">
-			<div class="col-sm-6 col-md-3">
-    			<p class="course-title">CMPE273</p>
-    			<div class="course-intro">
-       			<p class="course-name">Enterprise Software Platforms</p>
-       			<p>This class is for introducing cloud computing technologies</p>
-       			<p>
-       			<a href="#" class="btn btn-default" role="button">Learn</a></p>
-    			</div>
-  			</div>
-			<div class="col-sm-6 col-md-3">
-    			<p class="course-title">CMPE281</p>
-    			<div class="course-intro">
-       			<p class="course-name">Cloud Computing</p>
-       			<p>This class is for introducing cloud computing technologies</p>
-       			<p>
-       			<a href="#" class="btn btn-default" role="button">Learn</a></p>
-    			</div>
-  			</div>
-  			<div class="col-sm-6 col-md-3">
-    			<p class="course-title">CMPE280</p>
-    			<div class="course-intro">
-       			<p class="course-name">Web UI development</p>
-       			<p>This class is for introducing cloud computing technologies</p>
-       			<p>
-       			<a href="#" class="btn btn-default" role="button">Learn</a></p>
-    			</div>
-  			</div>
-  			<div class="col-sm-6 col-md-3">
-    			<p class="course-title">CMPE281</p>
-    			<div class="course-intro">
-       			<p class="course-name">Cloud Computing</p>
-       			<p>This class is for introducing cloud computing technologies</p>
-       			<p>
-       			<a href="#" class="btn btn-default" role="button">Learn</a></p>
-    			</div>
-  			</div>
-		</div>
-  	</div>
-</div> <!-- Course Recommendation Panel-->
-
-</div> <!-- /container -->
+<!-- /container -->

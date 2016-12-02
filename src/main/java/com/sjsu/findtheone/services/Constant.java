@@ -2,6 +2,8 @@ package com.sjsu.findtheone.services;
 
 public class Constant {
 
+	//baseURL
+	public static String baseURL = "http://findtheone-env.us-west-1.elasticbeanstalk.com";
 	//DB
 	public static String FINDTHEONEDB = "findtheonedb";
 
@@ -47,8 +49,8 @@ public class Constant {
 		public static String userUpdatedSuccess = "{\"Message\" : \"User updated successfully\"}";
 		public static String userCreatedSuccess = "{\"Message\" : \"User created successfully\"}";
 		public static String userCredentialsError = "{\"Message\" : \"username already present. Try some other username !\"}";
+		public static String userIncorrectCredentials = "{\"Message\" : \"Incorrect credentials, Try again!\"}";
 		public static String userNotFoundError = "{\"Message\" : \"User not found !\"}";
-				
 	}
 	
 	

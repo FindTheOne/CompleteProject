@@ -2,9 +2,16 @@ package com.sjsu.findtheone.services;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.tomcat.dbcp.dbcp.DbcpException;
+import org.apache.tomcat.util.bcel.Const;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -14,7 +21,6 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.WriteResult;
-
 
 public class MongoService {
 	public MongoClientURI mongoLab;
@@ -36,7 +42,7 @@ public class MongoService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
-		
+
 		database = client.getDB(Constant.FINDTHEONEDB);
 		userCollection = database.getCollection(Constant.userCollection);
 		courseCollection = database.getCollection(Constant.courseCollection);
@@ -44,7 +50,7 @@ public class MongoService {
 		conversationCollection = database.getCollection(Constant.conversationCollection);
 		currentUser = null;
 	}
-	/*
+
 	// Hybrid Recommendation
 	public List<JSONObject> getPersonalizedRecommendation(String username){
 		String friends = getFriends(username);
@@ -53,7 +59,7 @@ public class MongoService {
 		String interests = getInterests(username);
 		String[] interestsList = parseList(interests);
 
-		List<JSONObject> resultJSON = new ArrayList<>();
+		List<JSONObject> resultJSON = new ArrayList<JSONObject>();
 
 		for (String friend : friendsList){
 			for(String interest : interestsList){
@@ -91,20 +97,23 @@ public class MongoService {
 		System.out.println("printing return json : "+resultJSON.toString());
 		return resultJSON;
 	}
-	*/
-	
 
 	// Content Recommendation
 	public List<JSONObject> getContentRecommendation(String userName){
 		String interests = getInterests(userName);
 		String[] interestsList = parseList(interests);
-		List<JSONObject> result = new ArrayList<>();
+		List<JSONObject> result = new ArrayList<JSONObject>();
 		for(String interest : interestsList){
 			String teachers = getTeachers(interest);
 			if(teachers.length()>0){
 				String[] teacherList = parseList(teachers);
 				JSONObject entry = new JSONObject();
-				entry.put(interest, teacherList);
+				try {
+					entry.put("courseName", interest);
+					entry.put("tutors", teacherList);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 				result.add(entry);
 			}
 		}
@@ -112,18 +121,48 @@ public class MongoService {
 		return result;
 	}
 
+	// Course Recommendation
+	public JSONObject getCourseRecommendation(String userName){
+		String userInterests = getInterests(userName);
+		List<String> userInterestsList = Arrays.asList(parseList(userInterests));
 
-	public String getInterests(String userName){
-		if(currentUser == null){
-			//			userCollection = database.getCollection(Constant.userCollection);
-			BasicDBObject query = new BasicDBObject();
-			query.put(Constant.UserQuery.userName, userName);
-			DBCursor cursor = userCollection.find(query);
-			if(cursor.hasNext()){
-				currentUser = cursor.next();
+		System.out.println("Userinterests of "+username+" are : "+userInterests);
+		String friends = getFriends(userName);
+		String[] friendsList = parseList(friends);
+		System.out.println("friends of "+username+" are : "+friends);
+
+		List<String> result = new ArrayList<>();
+
+		for(String friend : friendsList){
+			String interests = getInterests(friend);
+			String[] interestsList = parseList(interests);
+			for(String course : interestsList){
+				if(!result.contains(course) && !userInterestsList.contains(course)){
+					result.add(course);
+				}
 			}
 		}
-		String stringify = currentUser.get(Constant.UserQuery.interests).toString();
+		JSONObject finalResult = new JSONObject();
+		try {
+			finalResult.append("result", result);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return finalResult;
+	}
+
+	
+	
+	public String getInterests(String userName){
+		BasicDBObject query = new BasicDBObject();
+		query.put(Constant.UserQuery.userName, userName);
+		DBCursor cursor = userCollection.find(query);
+		DBObject dBObject = null;
+		if(cursor.hasNext()){
+			dBObject = cursor.next();
+		}
+
+		String stringify = dBObject.get(Constant.UserQuery.interests).toString();
 		stringify = stringify.replaceAll(Constant.UserQuery.replaceRegex, Constant.UserQuery.emptyString);
 		return stringify;
 	}
@@ -171,6 +210,17 @@ public class MongoService {
 			return false;
 		}
 	}
+	
+	public DBObject isValidUser(Map<String, Object> map){
+		BasicDBObject userQuery = new BasicDBObject(map);
+		DBCursor cursor = userCollection.find(userQuery).limit(1);
+		if(cursor.hasNext()){
+			System.out.println("isValidUser : "+cursor);
+			return cursor.next();
+		}
+		System.out.println("isValidUser : "+cursor);
+		return null;
+	}
 
 	public BasicDBObject getUser(String userName){
 		BasicDBObject query = new BasicDBObject();
@@ -182,7 +232,17 @@ public class MongoService {
 			return new BasicDBObject("Result", "No such username found");
 	}
 
-	
+	public BasicDBObject getCourse(String courseName){
+		BasicDBObject query = new BasicDBObject();
+		query.put(Constant.CourseQuery.courseName, courseName);
+		DBCursor cursor = courseCollection.find(query);
+		if(cursor.hasNext()){
+			return new BasicDBObject("Result", cursor.next());
+		}else{
+			return new BasicDBObject("Result", "No such courseName found");
+		}
+	}
+
 	public boolean updateCourse(String courseName, String userName, boolean isStudent){
 		//		DBCollection courseCollection = database.getCollection("course");
 		//check if course is present, add userName to isStudent or isTeacher
@@ -232,75 +292,102 @@ public class MongoService {
 		String[] resultJSON = parseList(result);
 		return resultJSON;
 	}
-	
+
 	public List<String> getMentorsOfCourse(String courseName){
 		BasicDBObject query = new BasicDBObject().append("name", courseName);
 		DBObject courseObject = courseCollection.findOne(query);
 		return (List<String>)courseObject.get("teachers");
 	}
-	
+
 	public List<String> getStudentsOfCourse(String courseName){
 		BasicDBObject query = new BasicDBObject().append("name", courseName);
 		DBObject courseObject = courseCollection.findOne(query);
 		return (List<String>)courseObject.get("students");
 	}
-
 	
-	public boolean createMessage(BasicDBObject messageObject){
-		conversationCollection.insert(messageObject);
+	public List<String> getUsersWithWhomHadConversation(String userName){
+		
+		HashSet<String> set = new HashSet<String>();
+		List<BasicDBObject> queries = new ArrayList<BasicDBObject>();
+
+		queries.add(new BasicDBObject().append("to", userName));
+		queries.add(new BasicDBObject().append("from", userName));
+
+		DBCursor cursor = conversationCollection.find(new BasicDBObject("$or", queries)).sort(new BasicDBObject("date", 1));
+
+		while(cursor.hasNext()){
+			DBObject obj = cursor.next();
+			
+			String toUser = obj.get("to").toString();
+			String fromUser = obj.get("from").toString();
+			
+			if(toUser.equals(userName)){
+				set.add(fromUser);
+			}else if(fromUser.equals(userName)){
+				set.add(toUser);
+			}
+		}
+		
+    	return new ArrayList<String>(set);
+	}
+
+
+	public boolean createMessage(Map<String, Object> map){
+		conversationCollection.insert(new BasicDBObject(map));
 		return true;
 	}
-	
+
 	public List<BasicDBObject> receivedText(String to){
 		List<BasicDBObject> list = new ArrayList<BasicDBObject>();
-		
+
 		DBCursor cursor = conversationCollection.find(new BasicDBObject().append("to", to));
-		
+
 		while(cursor.hasNext()){
 			DBObject obj = cursor.next();
 			BasicDBObject listItem = new BasicDBObject().append("from", obj.get("from").toString())
-														.append("text", obj.get("text").toString())
-														.append("date", obj.get("date"));
+					.append("text", obj.get("text").toString())
+					.append("date", obj.get("date"));
 			list.add(listItem);
 		}
 		return list;
 	}
-	
+
 	public List<BasicDBObject> sentText(String from){
 		List<BasicDBObject> list = new ArrayList<BasicDBObject>();
-		
+
 		DBCursor cursor = conversationCollection.find(new BasicDBObject().append("from", from));
-		
+
 		while(cursor.hasNext()){
 			DBObject obj = cursor.next();
 			BasicDBObject listItem = new BasicDBObject().append("to", obj.get("to").toString())
-														.append("text", obj.get("text").toString())
-														.append("date", obj.get("date"));
+					.append("text", obj.get("text").toString())
+					.append("date", obj.get("date"));
 			list.add(listItem);
 		}
 		return list;
 	}
-	
+
 	//get conversation between two users
 	public List<BasicDBObject> getInbox(String user1, String user2){
 		List<BasicDBObject> list = new ArrayList<BasicDBObject>();
 		List<BasicDBObject> queries = new ArrayList<BasicDBObject>();
-		
+
 		queries.add(new BasicDBObject().append("to", user1).append("from", user2));
 		queries.add(new BasicDBObject().append("to", user2).append("from", user1));
-		
+
 		DBCursor cursor = conversationCollection.find(new BasicDBObject("$or", queries)).sort(new BasicDBObject("date", 1));
-		
+
 		while(cursor.hasNext()){
 			DBObject obj = cursor.next();
-			BasicDBObject listItem = new BasicDBObject().append("to", obj.get("to").toString())
-														.append("text", obj.get("text").toString())
-														.append("date", obj.get("date"));
+			BasicDBObject listItem = new BasicDBObject()
+					.append("to", obj.get("to").toString())
+					.append("text", obj.get("text").toString())
+					.append("date", obj.get("date"));
 			list.add(listItem);
 		}
 		return list;
 	}
-	
+
 	public boolean doesUserExist(BasicDBObject query){
 		DBObject findUser = userCollection.findOne(query);
 		if (findUser == null)

@@ -1,0 +1,38 @@
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Friends</h1>
+		</div>
+		<div class="col-lg-12">
+			<div class="friendCard" ng-repeat="x in friendsDetail">
+				<a ng-href="#/profile/{{x.userName}}"> <img
+					ng-src='http://saumeel.com/295Project/ProfileImages/{{x.userName}}.jpg'
+					alt="">
+				</a>
+
+				<div class="leftContents">
+					<p class="user">{{x.userName | capitalize}}</p><br/>
+
+					<p class="title">Interests:</p>
+					<p ng-repeat="interest in x.interests" class="chip">{{interest}}</p>
+					<br />
+
+					<p class="title">Skills:</p>
+					<p ng-repeat="skill in x.skills" class="chip">{{skill}}</p>
+
+				</div>
+				<div class="rightContents">
+					<p class="title" style="width:135px">Contact Details</p>
+					<div>
+						<ul>
+							<li>{{x.phone}}</li>
+							<li>{{x.emailID}}</li>
+							<li>{{x.location}}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

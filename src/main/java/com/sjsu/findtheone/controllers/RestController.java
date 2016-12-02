@@ -17,7 +17,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.json.JSONObject;
+
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+import com.sjsu.findtheone.model.Message;
 import com.sjsu.findtheone.model.User;
 import com.sjsu.findtheone.services.Constant;
 import com.sjsu.findtheone.services.MongoService;
@@ -30,7 +34,6 @@ public class RestController {
 		db = new MongoService();
 	}
 	
-	/*
 	@GET
 	@Path("/hybridRecommendation/{param}")	// hybrid Recommendation based on friends and interests
 	@Produces(MediaType.APPLICATION_JSON)
@@ -38,9 +41,7 @@ public class RestController {
 		List<JSONObject> list = db.getPersonalizedRecommendation(msg);
 		return Response.status(200).entity(list.toString()).header("Access-Control-Allow-Origin", "*").build();
 	}
-	*/
 
-	/*
 	@GET
 	@Path("/contentRecommendation/{param}")	// content based Recommendation
 	@Produces(MediaType.APPLICATION_JSON)
@@ -48,7 +49,15 @@ public class RestController {
 		List<JSONObject> list = db.getContentRecommendation(username);
 		return Response.status(200).entity(list.toString()).header("Access-Control-Allow-Origin", "*").build();
 	}
-	*/
+	
+	@GET
+	@Path("/courseRecommendation/{param}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getCourseRecommendation(@PathParam("param") String username){
+		JSONObject jsonObject = db.getCourseRecommendation(username);
+		return Response.status(Status.OK).entity(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").build();
+	}
+	
 	// for creating user
 	@POST
 	@Path("/create/user")					
@@ -131,6 +140,7 @@ public class RestController {
 	@Path("/user/{param}")					// for getting user
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getUser(@PathParam("param") String username){
+		System.out.println("get user"+username);
 		BasicDBObject dbobject = db.getUser(username);
 		return Response.status(200).entity(dbobject.toString()).header("Access-Control-Allow-Origin", "*").build();	
 	}
@@ -151,6 +161,15 @@ public class RestController {
 		String[] interests = db.getInterestsOfUser(userName);
 		BasicDBObject result = new BasicDBObject(Constant.UserQuery.interests,interests);
 		return Response.status(200).entity(result.toString()).header("Access-Control-Allow-Origin", "*").build();
+	}
+	
+	@GET
+	@Path("/course/{param}")					// for getting course
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getCourse(@PathParam("param") String courseName){
+		System.out.println("get course"+courseName);
+		BasicDBObject dbObject = db.getCourse(courseName);
+		return Response.status(200).entity(dbObject.toString()).header("Access-Control-Allow-Origin", "*").build();	
 	}
 	
 	@GET
@@ -176,25 +195,23 @@ public class RestController {
 	@Path("/create/conversation")			// for creating message
 	@Consumes({MediaType.APPLICATION_FORM_URLENCODED,MediaType.APPLICATION_JSON})
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addUser(
-			@FormParam("to") String to,
-			@FormParam("from") String from,
-			@FormParam("text") String text) throws Exception {
+	public Response addConversation(
+			Message message
+			) throws Exception {
 
-		BasicDBObject messageObject = new BasicDBObject();
-		messageObject.append("to", to);
-		messageObject.append("from", from);
-		messageObject.append("text", text);
-		messageObject.append("date", new Date());
-		
-		boolean created = db.createMessage(messageObject);
-		System.out.println("here");
+		// take of exception from client side
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("from", message.getFrom());
+		map.put("to", message.getTo());
+		map.put("text", message.getText());
+		map.put("date", new Date());
+
+		boolean created = db.createMessage(map);
 		if (created){
-			System.out.println("in created");
+			System.out.println("created : true");
 			return Response.status(200).entity("{\"Result\" : \"Message created successfully\"}").header("Access-Control-Allow-Origin", "*").build();
 		}else{
-			System.out.println("in not created");
-			
+			System.out.println("created : false");
 			return Response.status(Status.BAD_REQUEST).entity("{\"Result\" : \"Message not created successfully\"}").header("Access-Control-Allow-Origin", "*").build();
 		}
 	}
@@ -225,6 +242,39 @@ public class RestController {
 		return Response.status(200).entity(result.toString()).header("Access-Control-Allow-Origin", "*").build();
 	}
 
+	@GET
+	@Path("/getUsersWithWhomHadConversation/{username}") // getting users with whom had conversation.
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getUsersWithWhomHadConversation(@PathParam("username") String userName){
+		List<String> listOfUsers = db.getUsersWithWhomHadConversation(userName);
+		BasicDBObject result = new BasicDBObject("result", listOfUsers);
+		return Response.status(200).entity(result.toString()).header("Access-Control-Allow-Origin", "*").build();
+	}
+	
+	
+	@POST
+	@Path("/isValidUser")	// is valid user
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response isValidUser(
+			User user) throws Exception {
+		
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put(Constant.UserQuery.userName, user.getUsername());
+		map.put(Constant.UserQuery.password, user.getPassword());
+		
+		System.out.println("here");
+		System.out.println(map);
+		DBObject isValidUser = db.isValidUser(map);
+
+		if (isValidUser != null){
+			return Response.status(200).entity(isValidUser.toString()).header("Access-Control-Allow-Origin", "*").build();
+		}else{
+			return Response.status(Status.BAD_REQUEST).entity(Constant.ResponseMessage.userIncorrectCredentials).header("Access-Control-Allow-Origin", "*").build();
+		}
+	}
+
+	
 	//Util Functions
 
 	//trim strings
