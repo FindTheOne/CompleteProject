@@ -16,7 +16,7 @@
 	rel="stylesheet">
 
 <link href="css/style.css" rel="stylesheet">
-
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script> -->
 <script src="js/lib/angular/angular.min.js"></script>
 <script src="js/lib/angular/angular-route.min.js"></script>
 <script src="js/lib/angular/angular-animate.min.js"></script>
@@ -84,7 +84,7 @@
 	<div class="page">
 		<main class="cf" ng-view></main>
 	</div>
-	<script
+ 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script>window.jQuery</script>
 	
