@@ -6,7 +6,7 @@ myApp.controller("InboxController", function($rootScope, $scope, $http, $window,
 
 	if(!ai.currentUser){
 		console.log("if");
-		$location.path('/#/login');
+		$location.path('./#/login');
 	}else{
 		
 		$rootScope.loggedInUser = ic.currentUser;

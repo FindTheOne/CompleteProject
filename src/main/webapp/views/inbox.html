@@ -21,14 +21,14 @@
 				<div ng-repeat="x in message" ng-show="message">
 					<div ng-if="user1 != x.to" style="overflow: auto;">
 						<div class="textChipRight">
-							<span>{{x.text}}</span> <a ng-href='/#/profile/{{user1}}'><img class="my-picture"
+							<span>{{x.text}}</span> <a ng-href='./#/profile/{{user1}}'><img class="my-picture"
 									src="{{baseURLImages}}/{{user1}}.jpg"
 									alt="image"> </a>
 						</div>
 					</div>
 					<div ng-if="user2 != x.to" style="overflow: auto;">
 						<div class="textChipLeft">
-							<span>{{x.text}}</span> <a ng-href='/#/profile/{{user2}}'><img class="my-picture"
+							<span>{{x.text}}</span> <a ng-href='./#/profile/{{user2}}'><img class="my-picture"
 									ng-src='{{baseURLImages}}/{{user2}}.jpg'
 									alt="{{tutor | capitalize}}"> </a>
 						</div>

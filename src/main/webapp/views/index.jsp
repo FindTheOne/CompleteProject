@@ -48,7 +48,7 @@
 						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="/#/home"><img alt=""
-					src="../images/logo.png"></a>
+					src="./images/logo.png"></a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<!--<li class="active"><a href="">Home</a></li>-->
@@ -66,13 +66,13 @@
 							</div>
 						</form>
 					</li>
-					<li><a ng-href="/#/friends">Friends</a></li>
-					<li><a href="/#/inbox">Messages</a></li>
-					<li><a href="/#/signUp">Sign Up</a></li>
-					<li><a href="/#/signout">Log Out</a></li>
+					<li><a ng-href="./#/friends">Friends</a></li>
+					<li><a href="./#/inbox">Messages</a></li>
+					<li><a href="./#/signUp">Sign Up</a></li>
+					<li><a href="./#/signout">Log Out</a></li>
 
 					<li><a href="../navbar-static-top/">Skills</a></li>
-					<li><a href="/#/profile/{{loggedInUser}}">{{loggedInUser |
+					<li><a href="./#/profile/{{loggedInUser}}">{{loggedInUser |
 							capitalize}}<span class="sr-only">(current)</span>
 					</a></li>
 

@@ -12,7 +12,7 @@ myApp.controller("SignupController", function($scope, $http, $window) {
 
 	$scope.submitDetails = function() {
 		var method = "POST";
-		var url = "http://findtheone-env.us-west-1.elasticbeanstalk.com/rest/create/user";
+		var url = constants.baseURL+"/rest/create/user";
 		console.log(angular.toJson($scope.form));
 		$http({  
 			method : method,  

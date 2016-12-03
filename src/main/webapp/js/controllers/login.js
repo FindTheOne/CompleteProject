@@ -25,14 +25,14 @@ myApp.controller("LoginController", function($rootScope, $http, $location, $scop
 		}).then( _success, _error);  
 	}
 	function _success(response) {
+		console.log("success login"); 
 		$rootScope.loggedInUser = response.data.userName; // assigning the response data to be the current user
-		$window.location.assign('/#/home');
+		$window.location.assign('./#/home');
 		$window.localStorage.currentUser = response.data.userName;
 	}
 	function _error(response){
 		console.log(response.data.Message); // incorrect credentials
-		
-		$window.location.assign('/#/login');
+		$window.location.assign('./#/login');
 	}
 
 });

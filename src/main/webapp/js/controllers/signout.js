@@ -6,7 +6,7 @@ myApp.controller("SignoutController", function($rootScope, $http, $location, $sc
 	$window.localStorage.clear();
 		
 //	$window.localStorage.currentUser = "";
-	$window.location.assign('/#/login');
+	$window.location.assign('./#/login');
 
 
 });

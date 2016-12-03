@@ -9,7 +9,7 @@ myApp.controller("DashboardController", function($scope, $http, $window, $locati
 
 	if(!dc.currentUser){
 		console.log("if");
-		$location.path('/#/login');
+		$location.path('./#/login');
 	}else{
 
 		$rootScope.loggedInUser = dc.currentUser;
@@ -21,9 +21,9 @@ myApp.controller("DashboardController", function($scope, $http, $window, $locati
 		var hybridRecommendationURL = constants.baseURL+"/rest/hybridRecommendation/"+username;
 		var tutorRecommendationURL = constants.baseURL+"/rest/contentRecommendation/"+username;
 
-		$scope.courseSubjects = [];
-		$scope.feed = [];
-		$scope.tutors = [];
+		
+		
+		
 
 		var method = "GET";
 
@@ -31,6 +31,7 @@ myApp.controller("DashboardController", function($scope, $http, $window, $locati
 			method : method,  
 			url : courseRecommendationURL
 		}).then(function success(response){
+			$scope.courseSubjects = [];
 			console.log("course recommendation: "+angular.toJson(response.data));
 			var courses = response.data["result"][0];
 			for(var i =0;i<courses.length;i++){
@@ -54,6 +55,7 @@ myApp.controller("DashboardController", function($scope, $http, $window, $locati
 			method : method,  
 			url : hybridRecommendationURL
 		}).then(function success(response){
+			$scope.feed = [];
 			console.log("feed console: "+angular.toJson(response.data));
 			$scope.feed = response.data;
 		}, function error(response){
@@ -65,6 +67,7 @@ myApp.controller("DashboardController", function($scope, $http, $window, $locati
 			method : method,  
 			url : tutorRecommendationURL
 		}).then(function success(response){
+			$scope.tutors = [];
 //			console.log("tutors console: "+response.data[0]["courseName"]); working
 			console.log("tutors console: "+angular.toJson(response.data)); 
 			$scope.tutors = response.data;

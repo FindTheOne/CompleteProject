@@ -4,7 +4,7 @@ myApp.controller("FriendsController", function($scope, $http, $window, $rootScop
 	fc.currentUser = $window.localStorage.currentUser;
 
 	if(!fc.currentUser){
-		$location.path('/#/login');
+		$location.path('./#/login');
 	}else{
 		$rootScope.loggedInUser = fc.currentUser;
 		var username = $rootScope.loggedInUser;

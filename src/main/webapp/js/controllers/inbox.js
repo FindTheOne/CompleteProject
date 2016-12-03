@@ -90,7 +90,7 @@ myApp.controller("InboxController", function($rootScope, $scope, $http, $window,
 	ic.currentUser = $window.localStorage.currentUser;
 	if(!ic.currentUser){
 		console.log("if");
-		$location.path('/#/login');
+		$location.path('./#/login');
 	}else{
 		ic.currentUser = $window.localStorage.currentUser;
 		console.log("else...");

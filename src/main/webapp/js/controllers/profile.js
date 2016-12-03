@@ -5,10 +5,8 @@ myApp.controller("ProfileController", function($scope, $http, $window, $routePar
 	pc.currentUser = $window.localStorage.currentUser;
 
 	if(!pc.currentUser){
-		$location.path('/#/login');
-		console.log("hello");
+		$location.path('./#/login');
 	}else{
-		console.log("hello222");
 		$rootScope.loggedInUser=pc.currentUser;
 		$scope.baseURLImages = constants.baseURLImages; 
 		console.log($rootScope.loggedInUser);
