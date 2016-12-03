@@ -8,9 +8,10 @@
 					<i class="fa fa-comments fa-1x"></i> Chats 
 				</div>
 				<ul class="list-group">
-					<li class="list-group-item" ng-class="{'text-right highligh-blue': temp == selectedTalker}" ng-repeat="temp in talkers"><span
-						class="pull-left" ><strong class=""></strong></span>
-						<span ng-click="getConversation(temp)">{{temp}}</span></li>
+					<!-- <li class="list-group-item" ng-class="{'text-right highligh-blue': temp == selectedTalker}" ng-repeat="temp in talkers"><span -->
+					<li class="list-group-item"  ng-repeat="temp in talkers"><div ng-class="{'wrapper': temp == selectedTalker}"><span
+						class="pull-left"><strong class=""></strong></span>
+						<span ng-click="getConversation(temp)"  ng-class="{'marquee': temp == selectedTalker, 'marqueePrev': temp != selectedTalker}" >{{temp | capitalize}}</span></div></li>
 				</ul>
 			</div>
 		</div>
@@ -42,7 +43,7 @@
 						class="input-group-btn">
 						<button class="btn btn-default" ng-click="sendMessage()" style="border-radius: 0;"
 							type="button">
-							<b>Send</b>
+							<i class="fa fa-paper-plane fa-1x"></i> <b>Send</b>
 						</button>
 					</span>
 				</div>

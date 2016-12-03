@@ -6,8 +6,11 @@ myApp.controller("ProfileController", function($scope, $http, $window, $routePar
 
 	if(!pc.currentUser){
 		$location.path('/#/login');
+		console.log("hello");
 	}else{
+		console.log("hello222");
 		$rootScope.loggedInUser=pc.currentUser;
+		$scope.baseURLImages = constants.baseURLImages; 
 		console.log($rootScope.loggedInUser);
 		var name = $routeParams.name;
 

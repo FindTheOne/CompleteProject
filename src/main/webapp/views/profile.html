@@ -1,22 +1,29 @@
 
 <hr class="">
 </hr>
-<div class="container" ng-hide="user"><center><h1><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></h1></center></div>
-<div class="container target" ng-init="getProfileDetails()"  ng-show="user">
+<div class="container" ng-hide="user">
+	<center>
+		<h1>
+			<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+		</h1>
+	</center>
+</div>
+<div class="container target" ng-init="getProfileDetails()"
+	ng-show="user">
 	<div class="row">
 		<div class="col-sm-10">
-			<h1 class="">{{user.userName | capitalize}}</h1>
+			<h1 class="">{{user.firstName}}</h1>
 
-			<button type="button" class="btn btn-success">Book me!</button>
-			<button type="button" class="btn btn-info">Send me a
-				message</button>
-			<br>
+			<a ng-hide="loggedInUser==user.userName" ng-href="/#/inbox">
+				<button type="button" class="btn btn-info">Send me a
+					message</button>
+			</a> <br>
+			
 		</div>
 		<div class="col-sm-2">
-			<a href="/users" class="pull-right"><img title="profile image"
-				class="img-circle img-responsive"
-				ng-src="{{baseURLImages}}/{{tutor}}.jpg"></a>
-
+			<a href="/#/profile/{{user.userName}}" class="pull-right"><img
+				title="profile image" class="img-circle img-responsive"
+				ng-src="{{baseURLImages}}/{{user.userName}}.jpg"></a>
 		</div>
 	</div>
 	<br>
@@ -25,7 +32,7 @@
 			<!--left col-->
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					Profile <i class="fa fa-user-circle fa-1x"></i>
+					<i class="fa fa-user-circle fa-1x"></i> Profile 
 				</div>
 				<ul class="list-group">
 					<li class="list-group-item text-right"><span class="pull-left"><strong
@@ -40,7 +47,7 @@
 			</div>
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					Education <i class="fa fa-address-card-o fa-1x"></i>
+					<i class="fa fa-address-card-o fa-1x"></i> Education
 				</div>
 				<ul class="list-group">
 					<li class="list-group-item text-right"><span class="pull-left"><strong
@@ -52,7 +59,7 @@
 
 			<div class="panel panel-default">
 				<div class="panel-heading ">
-					Activity <i class="fa fa-dashboard fa-1x"></i>
+					<i class="fa fa-dashboard fa-1x"></i> Activity 
 				</div>
 				<ul class="list-group">
 					<li class="list-group-item text-right"><span class="pull-left"><strong
@@ -65,122 +72,55 @@
 		<!--/col-3-->
 		<div class="col-sm-9" contenteditable="false" style="">
 			<div class="panel panel-default">
-				<div class="panel-heading">{{firstName}} {{lastName}}'s Bio</div>
-				<div class="panel-body">A long description about me.</div>
-			</div>
-			<div class="panel panel-default target">
-				<div class="panel-heading" contenteditable="false">Friends</div>
-				<div class="panel-body">
-					<div class="row">
-						<div class="col-md-4">
-							<div class="thumbnail">
-								<img alt="300x200" src="http://lorempixel.com/600/200/people">
-								<div class="caption">
-									<h3>Rover</h3>
-									<p>Cocker Spaniel who loves treats.</p>
-									<p></p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="thumbnail">
-								<img alt="300x200" src="http://lorempixel.com/600/200/city">
-								<div class="caption">
-									<h3>Marmaduke</h3>
-									<p>Is just another friendly dog.</p>
-									<p></p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="thumbnail">
-								<img alt="300x200" src="http://lorempixel.com/600/200/sports">
-								<div class="caption">
-									<h3>Rocky</h3>
-									<p>Loves catnip and naps. Not fond of children.</p>
-									<p></p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<div class="panel-heading"><i class="fa fa-wpexplorer fa-1x"></i> {{user.firstName}}
+					{{user.lastName}}'s Bio </div>
+				<div class="panel-body">Engineer, Coder !!</div>
 			</div>
 
+			<!-- Friends -->
 			<div class="panel panel-default target">
-				<div class="panel-heading" contenteditable="false">Interests</div>
+				<div class="panel-heading" contenteditable="false"
+					ng-show="user.friends.length"><i class="fa fa-users fa-1x"></i> Friends</div>
 				<div class="panel-body">
 					<div class="row">
-						<div class="col-md-4">
-							<div class="thumbnail">
-								<img alt="300x200" src="http://lorempixel.com/600/200/people">
-								<div class="caption">
-									<h3>Rover</h3>
-									<p>Cocker Spaniel who loves treats.</p>
-									<p></p>
-								</div>
+						<div class="col-md-4" ng-repeat="friend in user.friends">
+							<div class="image-cropper-small">
+								<a ng-href='/#/profile/{{friend}}'><img class="my-picture"
+									ng-src="{{baseURLImages}}/{{friend}}.jpg"
+									alt="{{friend | capitalize}}"> </a>
 							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="thumbnail">
-								<img alt="300x200" src="http://lorempixel.com/600/200/city">
-								<div class="caption">
-									<h3>Marmaduke</h3>
-									<p>Is just another friendly dog.</p>
-									<p></p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="thumbnail">
-								<img alt="300x200" src="http://lorempixel.com/600/200/sports">
-								<div class="caption">
-									<h3>Rocky</h3>
-									<p>Loves catnip and naps. Not fond of children.</p>
-									<p></p>
-								</div>
-							</div>
+							<div style="text-align: center; font-weight: bold">{{friend
+								| capitalize}}</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			<!-- Friends -->
 
+			<!-- Interests -->
 			<div class="panel panel-default target">
-				<div class="panel-heading" contenteditable="false">Skills</div>
+				<div class="panel-heading" contenteditable="false"
+					ng-show="user.friends.length"><i class="fa fa-bullhorn fa-1x"></i> Interests</div>
 				<div class="panel-body">
 					<div class="row">
-						<div class="col-md-4">
-							<div class="thumbnail">
-								<img alt="300x200" src="http://lorempixel.com/600/200/people">
-								<div class="caption">
-									<h3>Rover</h3>
-									<p>Cocker Spaniel who loves treats.</p>
-									<p></p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="thumbnail">
-								<img alt="300x200" src="http://lorempixel.com/600/200/city">
-								<div class="caption">
-									<h3>Marmaduke</h3>
-									<p>Is just another friendly dog.</p>
-									<p></p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="thumbnail">
-								<img alt="300x200" src="http://lorempixel.com/600/200/sports">
-								<div class="caption">
-									<h3>Rocky</h3>
-									<p>Loves catnip and naps. Not fond of children.</p>
-									<p></p>
-								</div>
-							</div>
-						</div>
+						<p ng-repeat="interest in user.interests" class="chip">{{interest}}</p>
 					</div>
 				</div>
 			</div>
+			<!-- Interests  -->
+
+			<!-- Skills  -->
+			<div class="panel panel-default target">
+				<div class="panel-heading" contenteditable="false"
+					ng-show="user.friends.length"><i class="fa fa-space-shuttle fa-1x"></i> Skills</div>
+				<div class="panel-body">
+					<div class="row">
+						<p ng-repeat="skill in user.skills" class="chip">{{skill}}</p>
+					</div>
+				</div>
+			</div>
+			<!-- Skills  -->
+
 
 
 		</div>

@@ -2,10 +2,7 @@ myApp.controller("InboxController", function($rootScope, $scope, $http, $window,
 
 	console.log("inbox js");
 	var ic = this;
-	ic.currentUser = $window.localStorage.currentUser;
-
-
-
+	
 	$scope.sendMessage = function(){
 		var newMessage = {};
 		newMessage.to = $scope.user2;
@@ -90,11 +87,13 @@ myApp.controller("InboxController", function($rootScope, $scope, $http, $window,
 			console.log('error');	
 		}); 
 	}
-	
+	ic.currentUser = $window.localStorage.currentUser;
 	if(!ic.currentUser){
 		console.log("if");
 		$location.path('/#/login');
 	}else{
+		ic.currentUser = $window.localStorage.currentUser;
+		console.log("else...");
 		$rootScope.loggedInUser = ic.currentUser;
 		console.log($rootScope.loggedInUser);
 		$scope.baseURLImages = constants.baseURLImages;
