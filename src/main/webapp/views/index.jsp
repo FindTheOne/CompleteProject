@@ -75,10 +75,7 @@
 					</li>
 					<li><a ng-href="./#/friends">Friends</a></li>
 					<li><a href="./#/inbox">Messages</a></li>
-					<li><a href="./#/signUp">Sign Up</a></li>
 					<li><a href="./#/signout">Log Out</a></li>
-
-					<li><a href="../navbar-static-top/">Skills</a></li>
 					<li><a href="./#/profile/{{loggedInUser}}">{{loggedInUser
 							| capitalize}}<span class="sr-only">(current)</span>
 					</a></li>

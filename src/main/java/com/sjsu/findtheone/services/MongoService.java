@@ -152,8 +152,6 @@ public class MongoService {
 		return finalResult;
 	}
 
-	
-	
 	public String getInterests(String userName){
 		BasicDBObject query = new BasicDBObject();
 		query.put(Constant.UserQuery.userName, userName);
