@@ -246,6 +246,8 @@ public class MongoService {
 		//		DBCollection courseCollection = database.getCollection("course");
 		//check if course is present, add userName to isStudent or isTeacher
 		// if course is not present, create course and then add userName to isStudent or isTeacher
+		if(courseName == null || courseName == "") return false;
+		
 		BasicDBObject isCoursePresentQuery = new BasicDBObject();
 		isCoursePresentQuery.put(Constant.CourseQuery.courseName, courseName);
 		DBCursor cursor = courseCollection.find(isCoursePresentQuery);

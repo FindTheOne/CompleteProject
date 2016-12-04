@@ -8,8 +8,56 @@ public class User {
 	private String interests;
 	private String skills;
 	private String friends;
+	private String major;
+	private String educationLevel;
+	private String description;
+	private String phone;
+	private String location;
+	private String firstName;
+	private String lastName;
 	
-	
+	public String getMajor() {
+		return major;
+	}
+	public void setMajor(String major) {
+		this.major = major;
+	}
+	public String getEducationLevel() {
+		return educationLevel;
+	}
+	public void setEducationLevel(String educationLevel) {
+		this.educationLevel = educationLevel;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 	public String getUsername() {
 		return username;
 	}

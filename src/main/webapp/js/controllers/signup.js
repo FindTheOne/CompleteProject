@@ -7,7 +7,14 @@ myApp.controller("SignupController", function($scope, $http, $window) {
 			emailID : "",
 			interests : "",
 			skills : "",
-			friends: ""
+			friends: "",
+			phone: "",
+			educationLevel :"",
+			major: "",
+			location:"",
+			description:"",
+			lastName: "",
+			fastName:""
 	};
 
 	$scope.submitDetails = function() {

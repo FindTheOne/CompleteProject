@@ -17,7 +17,11 @@
 			<a ng-hide="loggedInUser==user.userName" ng-href="./#/inbox">
 				<button type="button" class="btn btn-info">Send me a
 					message</button>
-			</a> <br>
+			</a> 
+			<a ng-show="loggedInUser==user.userName" ng-href="./#/inbox">
+				<button type="button" class="btn btn-info">Edit Profile</button>
+			</a>
+			<br>
 			
 		</div>
 		<div class="col-sm-2">
@@ -120,7 +124,12 @@
 				</div>
 			</div>
 			<!-- Skills  -->
-
+	
+			<div>
+				<button>
+					Save Profile
+				</button>
+			</div>
 
 
 		</div>
