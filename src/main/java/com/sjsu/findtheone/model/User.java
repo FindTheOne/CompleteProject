@@ -15,6 +15,14 @@ public class User {
 	private String location;
 	private String firstName;
 	private String lastName;
+	private int sessionGiven;
+	private int sessionTaken;
+	
+	
+	public User(){
+		sessionGiven = 0;
+		sessionTaken = 0;
+	}
 	
 	public String getMajor() {
 		return major;
@@ -95,6 +103,4 @@ public class User {
 		this.friends = friends;
 	}
 	
-	
-
 }
