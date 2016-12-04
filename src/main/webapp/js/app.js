@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute']);
+var myApp = angular.module('myApp', ['ngRoute', 'slick']);
 myApp.config(['$routeProvider', '$locationProvider',function($routeProvider, $locationProvider) {
 
  /**to remove hash in the URL**/

@@ -3,7 +3,7 @@
 	<div class="page-header">
 		<div class="media">
 			<div class="media-left">
-				<a href="#"> <img class="media-object img-circle"
+				<a ng-href="./#/profile/{{currentUser}}"> <img class="media-object img-circle"
 					src="{{baseURLImages}}/{{currentUser}}.jpg"
 					alt="{{currentUser | capitalize}}"
 					style="height: 90px; width: 70px">
@@ -15,20 +15,26 @@
 			</div>
 		</div>
 	</div>
-		
+
 	<!-- Find-The-One Feed -->
-	
-	<div class="panel panel-default" ng-hide="feed"><center><h1><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></h1></center></div>
-	<div class="panel panel-default" ng-show="feed.length">
+	<div class="panel panel-default" ng-hide="feed.Length === feedlength">
+		<center>
+			<h1>
+				<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>
+			</h1>
+		</center>
+	</div>
+	<div class="panel panel-default" ng-show="feed.length === feedLength">
 		<!-- Default panel contents -->
 		<div class="panel-heading">Find-The-One Feed</div>
 		<div class="panel-body">
 			<div class="row">
-
+				<slick slides-to-show=3 slides-to-scroll=1 infinite=false
+					ng-if="feed.length == feedLength" data="feed">
 				<div class="col-sm-6 col-md-3 carousel" ng-repeat="x in feed">
 					<div class="tutor-card">
 						<p class="image-cropper-large">
-							<a ng-href='/#/profile/{{x.teacher}}'><img class="my-picture"
+							<a ng-href='./#/profile/{{x.teacher}}'><img class="my-picture"
 								src="{{baseURLImages}}/{{x.teacher}}.jpg"
 								alt="{{tutor | capitalize}}"> </a>
 						</p>
@@ -45,19 +51,32 @@
 						</div>
 					</div>
 				</div>
+				</slick>
 			</div>
 		</div>
 	</div>
 	<!-- Find-The-One Feed -->
 
 	<!-- Course Recommendation Panel-->
-	<div class="panel panel-default" ng-hide="courseSubjects"><center><h1><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></h1></center></div>
-	<div class="panel panel-default" ng-show="courseSubjects.length">
-	
+	<div class="panel panel-default"
+		ng-hide="courseSubjects.length === coursesLength">
+		<center>
+			<h1>
+				<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>
+			</h1>
+		</center>
+	</div>
+
+	<div class="panel panel-default"
+		ng-show="courseSubjects.length === coursesLength">
+
 		<!-- Default panel contents -->
 		<div class="panel-heading">Course Recommendation</div>
 		<div class="panel-body">
 			<div class="row">
+				<slick slides-to-show=3 slides-to-scroll=1 infinite=false
+					ng-if="courseSubjects.length == coursesLength"
+					data="courseSubjects">
 				<div class="col-sm-6 col-md-3" ng-repeat="x in courseSubjects">
 					<p class="course-title">{{x.name}}</p>
 					<div class="course-intro">
@@ -68,18 +87,31 @@
 						</p>
 					</div>
 				</div>
+				</slick>
 			</div>
 		</div>
 	</div>
 	<!-- Course Recommendation Panel-->
 
 	<!-- Tutor Recommendation Panel-->
-	<div class="panel panel-default" ng-hide="tutors"><center><h1><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></h1></center></div>
-	<div class="panel panel-default" ng-show="tutors.length">
+	<div class="panel panel-default"
+		ng-hide="tutors.length === tutorsLength">
+		<center>
+			<h1>
+				<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>
+			</h1>
+		</center>
+	</div>
+	<div class="panel panel-default"
+		ng-show="tutors.length === tutorsLength">
+
 		<!-- Default panel contents -->
 		<div class="panel-heading">Tutor Recommendation</div>
 		<div class="panel-body">
 			<div class="row">
+				<slick slides-to-show=3 slides-to-scroll=1 infinite=false
+					ng-if="tutors.length == tutorsLength" data="tutors">
+
 				<div class="col-sm-6 col-md-3" ng-repeat="x in tutors">
 					<p class="course-title">{{x.courseName}}</p>
 					<div class="course-intro">
@@ -93,6 +125,8 @@
 						</div>
 					</div>
 				</div>
+				</slick>
+
 			</div>
 		</div>
 	</div>

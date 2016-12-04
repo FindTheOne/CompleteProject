@@ -16,10 +16,17 @@
 	rel="stylesheet">
 
 <link href="css/style.css" rel="stylesheet">
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
 <script src="js/lib/angular/angular.min.js"></script>
 <script src="js/lib/angular/angular-route.min.js"></script>
 <script src="js/lib/angular/angular-animate.min.js"></script>
+
+
+<link rel="stylesheet" href="js/lib/bower_components/slick-carousel/slick/slick.css">
+<link rel="stylesheet" href="js/lib/bower_components/slick-carousel/slick/slick-theme.css">
+<!-- <script src="bower_components/jquery/jquery.js"></script> -->
+<script src="js/lib/bower_components/slick-carousel/slick/slick.js"></script>
+<script src="js/lib/bower_components/angular-slick/dist/slick.js"></script>
 
 <script src="js/app.js"></script>
 <script src="js/constant.js"></script>
@@ -47,7 +54,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/#/home"><img alt=""
+				<a class="navbar-brand" href="./#/home"><img alt=""
 					src="./images/logo.png"></a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
@@ -72,8 +79,8 @@
 					<li><a href="./#/signout">Log Out</a></li>
 
 					<li><a href="../navbar-static-top/">Skills</a></li>
-					<li><a href="./#/profile/{{loggedInUser}}">{{loggedInUser |
-							capitalize}}<span class="sr-only">(current)</span>
+					<li><a href="./#/profile/{{loggedInUser}}">{{loggedInUser
+							| capitalize}}<span class="sr-only">(current)</span>
 					</a></li>
 
 				</ul>
@@ -84,10 +91,9 @@
 	<div class="page">
 		<main class="cf" ng-view></main>
 	</div>
- 	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
 	<script>window.jQuery</script>
-	
+
 	<script src="js/lib/bootstrap.min.js"></script>
 
 </body>

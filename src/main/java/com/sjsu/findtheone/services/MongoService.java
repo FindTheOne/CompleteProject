@@ -88,6 +88,7 @@ public class MongoService {
 						entry.put(Constant.MeetingQuery.teacher, teacher);
 
 						resultJSON.add(entry);
+//						resultJSON.add(entry);
 					} catch(JSONException exception){
 						exception.printStackTrace();
 					}
