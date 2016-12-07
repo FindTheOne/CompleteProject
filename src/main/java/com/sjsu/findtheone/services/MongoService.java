@@ -212,6 +212,17 @@ public class MongoService {
 		}
 	}
 	
+	
+	public boolean doesAttributeExist(String attributeName, String attributeValue){
+		//use this for email and userName
+		BasicDBObject doesAttributeExistQuery = new BasicDBObject().append(attributeName, attributeValue);
+		DBCursor cursor = userCollection.find(doesAttributeExistQuery).limit(1);
+		if(cursor.hasNext()){
+			return true;
+		}
+		return false;
+	}
+	
 	public DBObject isValidUser(Map<String, Object> map){
 		BasicDBObject userQuery = new BasicDBObject(map);
 		DBCursor cursor = userCollection.find(userQuery).limit(1);

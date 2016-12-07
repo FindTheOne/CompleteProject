@@ -18,6 +18,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.mongodb.BasicDBObject;
@@ -272,6 +273,22 @@ public class RestController {
 		return Response.status(200).entity(result.toString()).header("Access-Control-Allow-Origin", "*").build();
 	}
 	
+	@GET
+	@Path("/doesAttributeExist/{attributeName}/{attributeValue}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response isValidUserName(@PathParam("attributeName") String attributeName, @PathParam("attributeValue") String attributeValue){
+		
+		System.out.println("In check");
+		
+		Boolean attributeExist = db.doesAttributeExist(attributeName, attributeValue);
+		JSONObject result = null;
+		try {
+			result = new JSONObject().put("result", attributeExist);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return Response.status(200).entity(result.toString()).header("Access-Control-Allow-Origin", "*").build();
+	}
 	
 	@POST
 	@Path("/isValidUser")	// is valid user

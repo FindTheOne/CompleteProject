@@ -64,3 +64,58 @@ myApp.directive('fallbackSrc', function () {
 	return fallbackSrc;
 });
 
+
+
+ myApp.directive('uniqueEmail', uniqueEmail);
+
+  /** @ngInject */
+  function uniqueEmail($http) {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function(scope, element, attrs, ngModel) {
+          element.bind('blur', function() {
+            if (ngModel.$modelValue) {
+            	$http({
+    				method : 'GET',
+    				url : constants.baseURL+"/rest/doesAttributeExist/emailID/"+ngModel.$modelValue,
+    				data : []
+    			}).success(function(data) {
+                ngModel.$setValidity('unique', !data.result);
+              });
+            }
+          });
+          element.bind('keyup', function() {
+            ngModel.$setValidity('unique', true);
+          });
+        }
+    };
+  }
+  
+  
+  myApp.directive('uniqueUsername', uniqueUserName);
+
+  /** @ngInject */
+  function uniqueUserName($http) {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function(scope, element, attrs, ngModel) {
+          element.bind('blur', function() {
+            if (ngModel.$modelValue) {
+            	$http({
+    				method : 'GET',
+    				url : constants.baseURL+"/rest/doesAttributeExist/userName/"+ngModel.$modelValue,
+    				data : []
+    			}).success(function(data) {
+                ngModel.$setValidity('unique', !data.result);
+              });
+            }
+          });
+          element.bind('keyup', function() {
+            ngModel.$setValidity('unique', true);
+          });
+        }
+    };
+  }
+  
