@@ -18,7 +18,6 @@ public class User {
 	private int sessionGiven;
 	private int sessionTaken;
 	
-	
 	public User(){
 		sessionGiven = 0;
 		sessionTaken = 0;
@@ -30,6 +29,22 @@ public class User {
 	public void setMajor(String major) {
 		this.major = major;
 	}
+	public int getSessionGiven() {
+		return sessionGiven;
+	}
+
+	public void setSessionGiven(int sessionGiven) {
+		this.sessionGiven = sessionGiven;
+	}
+
+	public int getSessionTaken() {
+		return sessionTaken;
+	}
+
+	public void setSessionTaken(int sessionTaken) {
+		this.sessionTaken = sessionTaken;
+	}
+
 	public String getEducationLevel() {
 		return educationLevel;
 	}

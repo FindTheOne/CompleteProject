@@ -39,6 +39,15 @@ public class Constant {
 		public static String email = "emailID";
 		public static String skills = "skills";
 		public static String password = "pswd";
+		public static String location = "location";
+		public static String major = "major";
+		public static String educationLevel = "educationLevel";
+		public static String phone = "phone";
+		public static String firstName = "firstName";
+		public static String lastName = "lastName";
+		public static String description = "description";
+		public static String sessionGiven = "sessionGiven";
+		public static String sessionTaken = "sessionTaken";
 		
 		public static String replaceRegex = "[\\[\\]\\s\"]";
 		public static String emptyString = "";

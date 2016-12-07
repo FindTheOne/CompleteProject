@@ -8,7 +8,7 @@
 	href='https://fonts.googleapis.com/css?family=Lato:400,100,700,900'
 	rel='stylesheet' type='text/css'>
 
-
+<link rel="stylesheet" href="css/autocomplete.css">
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/navbar-fixed-top.css" rel="stylesheet">
 <link
@@ -16,18 +16,21 @@
 	rel="stylesheet">
 
 <link href="css/style.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
 <script src="js/lib/angular/angular.min.js"></script>
 <script src="js/lib/angular/angular-route.min.js"></script>
 <script src="js/lib/angular/angular-animate.min.js"></script>
 
 
-<link rel="stylesheet" href="js/lib/bower_components/slick-carousel/slick/slick.css">
-<link rel="stylesheet" href="js/lib/bower_components/slick-carousel/slick/slick-theme.css">
+<link rel="stylesheet"
+	href="js/lib/bower_components/slick-carousel/slick/slick.css">
+<link rel="stylesheet"
+	href="js/lib/bower_components/slick-carousel/slick/slick-theme.css">
 <!-- <script src="bower_components/jquery/jquery.js"></script> -->
 <script src="js/lib/bower_components/slick-carousel/slick/slick.js"></script>
 <script src="js/lib/bower_components/angular-slick/dist/slick.js"></script>
-
+<script type="text/javascript" src="js/lib/autocomplete.js"></script>
 <script src="js/app.js"></script>
 <script src="js/constant.js"></script>
 
@@ -54,8 +57,8 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="./#/home"><img alt=""
-					src="./images/logo.png"></a>
+				<a class="navbar-brand" ng-href="./#/home"><img alt=""
+					ng-src="./images/logo.png"></a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<!--<li class="active"><a href="">Home</a></li>-->
@@ -74,12 +77,11 @@
 						</form>
 					</li>
 					<li><a ng-href="./#/friends">Friends</a></li>
-					<li><a href="./#/inbox">Messages</a></li>
-					<li><a href="./#/signout">Log Out</a></li>
-					<li><a href="./#/profile/{{loggedInUser}}">{{loggedInUser
+					<li><a ng-href="./#/inbox">Messages</a></li>
+					<li><a ng-href="./#/signout">Log Out</a></li>
+					<li><a ng-href="./#/profile/{{loggedInUser}}">{{loggedInUser
 							| capitalize}}<span class="sr-only">(current)</span>
 					</a></li>
-
 				</ul>
 			</div>
 			<!--/.nav-collapse -->
@@ -89,7 +91,9 @@
 		<main class="cf" ng-view></main>
 	</div>
 
-	<script>window.jQuery</script>
+	<script>
+		window.jQuery
+	</script>
 
 	<script src="js/lib/bootstrap.min.js"></script>
 

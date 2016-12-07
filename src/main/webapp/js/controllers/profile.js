@@ -9,6 +9,7 @@ myApp.controller("ProfileController", function($scope, $http, $window, $routePar
 	}else{
 		$rootScope.loggedInUser=pc.currentUser;
 		$scope.baseURLImages = constants.baseURLImages; 
+		$scope.defaultImageURL = constants.defaultImageURL;
 		console.log($rootScope.loggedInUser);
 		var name = $routeParams.name;
 

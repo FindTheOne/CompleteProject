@@ -3,7 +3,7 @@ myApp.controller("DashboardController", function($scope, $http, $window, $locati
 	//if (typeof $rootScope.loggedInUser === 'undefined'){
 
 	$scope.baseURLImages = constants.baseURLImages;
-
+	$scope.defaultImageURL = constants.defaultImageURL;
 	var dc = this;
 	dc.currentUser = $window.localStorage.currentUser;
 

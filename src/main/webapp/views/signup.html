@@ -1,22 +1,115 @@
-<div class="container">
-	<form ng-submit="submitDetails()">
-		Username: <input type="text" ng-model="form.username" /><br /> <br />
-		emailId: <input type="email" ng-model="form.emailID" /><br /> <br />
-		Password: <input type="text" ng-model="form.password" /><br /> <br />
-		First Name: <input type="text" ng-model="form.firstName" /><br /> <br />
-		Last Name: <input type="text" ng-model="form.lastName" /><br /> <br />
-		Short Description about yourself : <input type="text" ng-model="form.description" /><br /> <br />
-		Education Level : <input type="text" ng-model="form.educationLevel" /><br /> <br />
-		Major : <input type="text" ng-model="form.major" /><br /> <br />
-		Location : <input type="text" ng-model="form.location" /><br /> <br />
-		Phone Number : <input type="text" ng-model="form.phone" /><br /> <br />
-		Skills: <input type="textarea" ng-model="form.skills" /><br /> <br />
-		Interests: <input type="textarea" ng-model="form.interests" /><br /><br /> 
-		Friends: <input type="textarea" ng-model="form.friends" /><br />
-		<br /> <input type="submit" value="submit" />
-	</form>
-</div>
-<div ng-show="message">
-	<p ng-if="message.status == 200">User Created</p>
-	<p ng-if="message.status != 200">Oops, error..try again!</p>
+<div ng-controller="SignupController as vm">
+
+	<div class="container" ng-show="vm.isReg">
+		<div>
+			<center>
+				<h2>{{vm.message}}</h2>
+			</center>
+			<center>
+				<a ng-href="./#/login">
+					<button>Go to Login</button>
+				</a>
+			</center>
+		</div>
+
+	</div>
+
+	<div class="container" ng-show='!vm.isReg'>
+		<div class="col-md-6 col-md-offset-3">
+			<h2>Register</h2>
+			<form name="form" role="form">
+				<div class="form-group"
+					ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
+					<label for="firstName">First name</label> <input type="text"
+						name="firstName" id="firstName" class="form-control"
+						ng-model="vm.user.firstName" required /> <span
+						ng-show="form.firstName.$dirty && form.firstName.$error.required"
+						class="help-block">First name is required</span>
+				</div>
+				<div class="form-group"
+					ng-class="{ 'has-error': form.lastName.$dirty && form.lastName.$error.required }">
+					<label for="username">Last name</label> <input type="text"
+						name="lastName" id="Text1" class="form-control"
+						ng-model="vm.user.lastName" required /> <span
+						ng-show="form.lastName.$dirty && form.lastName.$error.required"
+						class="help-block">Last name is required</span>
+				</div>
+				<div class="form-group"
+					ng-class="{ 'has-error': form.emailID.$dirty && form.emailID.$error.required }">
+					<label for="emailID">Email</label> <input type="email"
+						name="emailID" id="emailID" class="form-control"
+						ng-model="vm.user.emailID" required /> <span
+						ng-show="form.emailID.$dirty && (form.emailID.$error.required || form.emailID.$error.email) "
+						class="help-block">Please enter a valid email</span>
+				</div>
+				<div class="form-group"
+					ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+					<label for="username">Username</label> <input type="text"
+						name="username" id="username" class="form-control"
+						ng-model="vm.user.username" required /> <span
+						ng-show="form.username.$dirty && form.username.$error.required"
+						class="help-block">Username is required</span>
+				</div>
+				<div class="form-group"
+					ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+					<label for="password">Password</label> <input type="password"
+						name="password" id="password" class="form-control"
+						ng-model="vm.user.password" required /> <span
+						ng-show="form.password.$dirty && form.password.$error.required"
+						class="help-block">Password is required</span>
+				</div>
+				<div class="form-group">
+					<label for="description">Short Description</label> <input
+						type="text" name="description" id="description"
+						class="form-control" ng-model="vm.user.description" required /> <span
+						ng-show="form.description.$dirty && form.description.$error.required"
+						class="help-block">Please enter a short description about
+						you !!</span>
+				</div>
+				<div class="form-group">
+					<label for="location">Location</label> <input type="text"
+						name="location" id="location" class="form-control"
+						ng-model="vm.user.location" />
+				</div>
+				<div class="form-group">
+					<label for="phone">Phone</label> <input type="number" name="phone"
+						id="phone" class="form-control" ng-model="vm.user.phone"
+						ng-minlength="10" ng-maxlength="10" ng-pattern="/^[0-9]+$/" /> <span
+						ng-show="form.phone.$dirty && (form.phone.$error.number || form.phone.$invalid)"
+						class="help-block">Please enter a 10 digit valid phone
+						number</span>
+				</div>
+				<div class="form-group">
+					<label for="major">Major</label> <input type="text" name="major"
+						id="major" class="form-control" ng-model="vm.user.major" />
+				</div>
+				<div class="form-group">
+					<label for="educationLevel">Education Level</label> <input
+						type="text" name="educationLevel" id="educationLevel"
+						class="form-control" ng-model="vm.user.educationLevel" />
+				</div>
+				<div class="form-group">
+					<label for="friends">Friends</label> <input type="text"
+						name="friends" id="friends" class="form-control"
+						ng-model="vm.user.friends" />
+				</div>
+				<div class="form-group">
+					<label for="skills">Skills</label> <input type="text" name="skills"
+						id="skills" class="form-control" ng-model="vm.user.skills" />
+				</div>
+				<div class="form-group">
+					<label for="interests">Interests</label> <input type="text"
+						name="interests" id="interests" class="form-control"
+						ng-model="vm.user.interests" />
+				</div>
+				<div class="form-actions">
+					<button ng-click="vm.submitDetails()"
+						ng-disabled="form.$invalid || vm.dataLoading"
+						class="btn btn-primary">Register</button>
+					<a href="./#/login" class="btn btn-link">Cancel</a>
+				</div>
+				
+			</form>
+		</div>
+	</div>
 </div>

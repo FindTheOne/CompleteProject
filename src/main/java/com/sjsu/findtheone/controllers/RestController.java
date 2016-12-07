@@ -1,5 +1,6 @@
 package com.sjsu.findtheone.controllers;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +33,16 @@ public class RestController {
 	MongoService db;
 	public RestController() {
 		db = new MongoService();
+	}
+	
+	
+	@GET
+	@Path("/getUsersForSearch/{param}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getUsersForSearch(@PathParam("param") String searchKey) {
+		JSONObject result = db.getUsersForSearch(searchKey);
+		System.out.println(result);
+		return Response.status(200).entity(result.toString()).header("Access-Control-Allow-Origin", "*").build();
 	}
 	
 	@GET
@@ -70,6 +81,16 @@ public class RestController {
 		map.put(Constant.UserQuery.userName, user.getUsername());
 		map.put(Constant.UserQuery.email, user.getEmailID());
 		map.put(Constant.UserQuery.password, user.getPassword());
+		map.put(Constant.UserQuery.location, user.getLocation());
+		map.put(Constant.UserQuery.description, user.getDescription());
+		map.put(Constant.UserQuery.firstName, user.getFirstName());
+		map.put(Constant.UserQuery.lastName, user.getLastName());
+		map.put(Constant.UserQuery.phone, user.getPhone());
+		map.put(Constant.UserQuery.educationLevel, user.getEducationLevel());
+		map.put(Constant.UserQuery.major, user.getMajor());
+		map.put(Constant.UserQuery.sessionGiven, user.getSessionGiven());
+		map.put(Constant.UserQuery.sessionTaken, user.getSessionTaken());
+		
 		String interestList[] = trim(user.getInterests().split(Constant.COMMA));
 		map.put(Constant.UserQuery.interests, interestList);
 		String skillList[] = trim(user.getSkills().split(Constant.COMMA));

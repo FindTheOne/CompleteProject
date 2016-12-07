@@ -1,40 +1,40 @@
-var myApp = angular.module('myApp', ['ngRoute', 'slick']);
+var myApp = angular.module('myApp', ['ngRoute', 'slick','autocomplete']);
 myApp.config(['$routeProvider', '$locationProvider',function($routeProvider, $locationProvider) {
 
- /**to remove hash in the URL**/
-//  $locationProvider.html5Mode({
-//    enabled : true,
-//    requireBase : false
-//  });
+	/**to remove hash in the URL**/
+//	$locationProvider.html5Mode({
+//	enabled : true,
+//	requireBase : false
+//	});
 
 	$routeProvider
 	.when('/home',{
 		templateUrl: 'views/home.html',
-      	controller: 'DashboardController'
+		controller: 'DashboardController'
 	})
 	.when('/login',{
 		templateUrl: 'views/login.html',
-      	controller: 'LoginController'
+		controller: 'LoginController'
 	})
 	.when('/success',{
 		templateUrl: 'views/success.html',
-      	controller: 'SuccessController'
+		controller: 'SuccessController'
 	})
 	.when('/inbox',{
 		templateUrl: 'views/inbox.html',
-      	controller: 'InboxController'
+		controller: 'InboxController'
 	})
 	.when('/signup',{
 		templateUrl: 'views/signup.html',
-      	controller: 'SignupController'
+		controller: 'SignupController'
 	})
 	.when('/friends',{
 		templateUrl: 'views/friends.html',
-      	controller: 'FriendsController'
+		controller: 'FriendsController'
 	})
 	.when('/profile/:name',{
 		templateUrl: 'views/profile.html',
-      	controller: 'ProfileController'
+		controller: 'ProfileController'
 	})
 	.when('/signout', {
 		templateUrl: 'views/signout.html',
@@ -47,8 +47,20 @@ myApp.config(['$routeProvider', '$locationProvider',function($routeProvider, $lo
 
 
 myApp.filter('capitalize', function() {
-    return function(input) {
-      return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
-    }
+	return function(input) {
+		return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
+	}
+});
+
+myApp.directive('fallbackSrc', function () {
+	var fallbackSrc = {
+			link: function postLink(scope, iElement, iAttrs) {
+				iElement.bind('error', function() {
+					//angular.element(this).attr("src", iAttrs.fallbackSrc);
+					angular.element(this).attr("src", constants.defaultImageURL);
+				});
+			}
+	}
+	return fallbackSrc;
 });
 

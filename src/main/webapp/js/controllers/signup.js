@@ -1,38 +1,36 @@
 myApp.controller("SignupController", function($scope, $http, $window) {
 
-	$scope.message;
-	$scope.form = {  
-			username : "",
-			password: "",
-			emailID : "",
-			interests : "",
-			skills : "",
-			friends: "",
-			phone: "",
-			educationLevel :"",
-			major: "",
-			location:"",
-			description:"",
-			lastName: "",
-			fastName:""
-	};
+	var vm = this;
+	vm.isReg = false;
+	vm.user = {};
+	vm.user.friends = "";
+	vm.user.skills = "";
+	vm.user.interests = "";
 
-	$scope.submitDetails = function() {
+	vm.submitDetails = function() {
+		console.log("registering user : "+angular.toJson(vm.user));
+
 		var method = "POST";
 		var url = constants.baseURL+"/rest/create/user";
-		console.log(angular.toJson($scope.form));
+
 		$http({  
 			method : method,  
 			url : url,  
-			data : angular.toJson($scope.form),  
+			data : angular.toJson(vm.user),
+//			data: vm.user,
 			headers : {  
 				'Content-Type' : 'application/json'
 			}  
 		}).then( _success);  
 	}
-	function _success(response) {  
-		console.log(response);
-		$scope.message = response;
-	}  
-	});
+
+	function _success(response) {		
+		
+		vm.isReg = true;
+		vm.message = response.data.Message;
+		console.log("response message: "+ response.data.Message);
+	} 
+
+
+});
 

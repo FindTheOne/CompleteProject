@@ -3,10 +3,11 @@
 	<div class="page-header">
 		<div class="media">
 			<div class="media-left">
-				<a ng-href="./#/profile/{{currentUser}}"> <img class="media-object img-circle"
-					src="{{baseURLImages}}/{{currentUser}}.jpg"
-					alt="{{currentUser | capitalize}}"
-					style="height: 90px; width: 70px">
+				<a ng-href="./#/profile/{{currentUser}}"> <img
+					class="img-circle"
+					ng-src="{{baseURLImages}}/{{currentUser}}.jpg"
+					fallback-src={{defaultImageURL}}
+					style="height: 70px; width: 70px">
 				</a>
 			</div>
 			<div class="media-body media-middle">
@@ -34,9 +35,10 @@
 				<div class="col-sm-6 col-md-3 carousel" ng-repeat="x in feed">
 					<div class="tutor-card">
 						<p class="image-cropper-large">
-							<a ng-href='./#/profile/{{x.teacher}}'><img class="my-picture"
-								src="{{baseURLImages}}/{{x.teacher}}.jpg"
-								alt="{{tutor | capitalize}}"> </a>
+							<a ng-href='./#/profile/{{x.teacher}}'><img
+								class="my-picture" src="{{baseURLImages}}/{{x.teacher}}.jpg"
+								fallback-src={{defaultImageURL}} alt="{{tutor | capitalize}}">
+							</a>
 						</p>
 						<div class="tutor-intro">
 							<p class="tutor-name">{{x.teacher | capitalize}}</p>
@@ -120,7 +122,8 @@
 							<div class="image-cropper-small">
 								<a ng-href='/#/profile/{{tutor}}'><img class="my-picture"
 									src="{{baseURLImages}}/{{tutor}}.jpg"
-									alt="{{tutor | capitalize}}"> </a>
+									fallback-src={{defaultImageURL}} alt="{{tutor | capitalize}}">
+								</a>
 							</div>
 						</div>
 					</div>
@@ -131,7 +134,6 @@
 		</div>
 	</div>
 	<!-- Tutor Recommendation Panel-->
-
 
 </div>
 

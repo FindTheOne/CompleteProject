@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import javax.json.JsonObject;
+
 import org.apache.tomcat.dbcp.dbcp.DbcpException;
 import org.apache.tomcat.util.bcel.Const;
 import org.json.JSONException;
@@ -389,6 +391,33 @@ public class MongoService {
 		return list;
 	}
 
+	// get users for search box
+	public JSONObject getUsersForSearch(String searchKey){
+		List<String> list = new ArrayList<String>();
+
+		String regexForSearchKey = "^"+searchKey;
+		BasicDBObject query = new BasicDBObject().append("userName", java.util.regex.Pattern.compile(regexForSearchKey));
+		BasicDBObject projection = new BasicDBObject().append("userName", 1).append("_id", 0);
+		
+		System.out.println("query :"+query);
+		System.out.println("projection :"+projection);
+		
+		DBCursor cursor = userCollection.find(query, projection);
+		
+		while(cursor.hasNext()){
+			DBObject obj = cursor.next();
+			System.out.println(obj.get("userName").toString());
+			list.add(obj.get("userName").toString());
+		}
+		JSONObject jsonObject = new JSONObject();
+		try {
+			jsonObject.put("result", list);
+		} catch (JSONException e1) {
+			e1.printStackTrace();
+		}
+		return jsonObject;
+	}
+	
 	public boolean doesUserExist(BasicDBObject query){
 		DBObject findUser = userCollection.findOne(query);
 		if (findUser == null)

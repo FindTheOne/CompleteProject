@@ -17,17 +17,16 @@
 			<a ng-hide="loggedInUser==user.userName" ng-href="./#/inbox">
 				<button type="button" class="btn btn-info">Send me a
 					message</button>
-			</a> 
-			<a ng-show="loggedInUser==user.userName" ng-href="./#/inbox">
+			</a> <a ng-show="loggedInUser==user.userName" ng-href="./#/inbox">
 				<button type="button" class="btn btn-info">Edit Profile</button>
-			</a>
-			<br>
-			
+			</a><br>
+
 		</div>
 		<div class="col-sm-2">
-			<a href="./#/profile/{{user.userName}}" class="pull-right"><img
+			<a ng-href="./#/profile/{{user.userName}}" class="pull-right"><img
 				title="profile image" class="img-circle img-responsive"
-				ng-src="{{baseURLImages}}/{{user.userName}}.jpg"></a>
+				ng-src="{{baseURLImages}}/{{user.userName}}.jpg"
+				fallback-src={{defaultImageURL}}></a>
 		</div>
 	</div>
 	<br>
@@ -36,7 +35,7 @@
 			<!--left col-->
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<i class="fa fa-user-circle fa-1x"></i> Profile 
+					<i class="fa fa-user-circle fa-1x"></i> Profile
 				</div>
 				<ul class="list-group">
 					<li class="list-group-item text-right"><span class="pull-left"><strong
@@ -63,7 +62,7 @@
 
 			<div class="panel panel-default">
 				<div class="panel-heading ">
-					<i class="fa fa-dashboard fa-1x"></i> Activity 
+					<i class="fa fa-dashboard fa-1x"></i> Activity
 				</div>
 				<ul class="list-group">
 					<li class="list-group-item text-right"><span class="pull-left"><strong
@@ -76,15 +75,19 @@
 		<!--/col-3-->
 		<div class="col-sm-9" contenteditable="false" style="">
 			<div class="panel panel-default">
-				<div class="panel-heading"><i class="fa fa-wpexplorer fa-1x"></i> {{user.firstName}}
-					{{user.lastName}}'s Bio </div>
+				<div class="panel-heading">
+					<i class="fa fa-wpexplorer fa-1x"></i> {{user.firstName}}
+					{{user.lastName}}'s Bio
+				</div>
 				<div class="panel-body">Engineer, Coder !!</div>
 			</div>
 
 			<!-- Friends -->
 			<div class="panel panel-default target">
 				<div class="panel-heading" contenteditable="false"
-					ng-show="user.friends.length"><i class="fa fa-users fa-1x"></i> Friends</div>
+					ng-show="user.friends.length">
+					<i class="fa fa-users fa-1x"></i> Friends
+				</div>
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-md-4" ng-repeat="friend in user.friends">
@@ -104,7 +107,9 @@
 			<!-- Interests -->
 			<div class="panel panel-default target">
 				<div class="panel-heading" contenteditable="false"
-					ng-show="user.friends.length"><i class="fa fa-bullhorn fa-1x"></i> Interests</div>
+					ng-show="user.friends.length">
+					<i class="fa fa-bullhorn fa-1x"></i> Interests
+				</div>
 				<div class="panel-body">
 					<div class="row">
 						<p ng-repeat="interest in user.interests" class="chip">{{interest}}</p>
@@ -116,7 +121,9 @@
 			<!-- Skills  -->
 			<div class="panel panel-default target">
 				<div class="panel-heading" contenteditable="false"
-					ng-show="user.friends.length"><i class="fa fa-space-shuttle fa-1x"></i> Skills</div>
+					ng-show="user.friends.length">
+					<i class="fa fa-space-shuttle fa-1x"></i> Skills
+				</div>
 				<div class="panel-body">
 					<div class="row">
 						<p ng-repeat="skill in user.skills" class="chip">{{skill}}</p>
@@ -124,11 +131,9 @@
 				</div>
 			</div>
 			<!-- Skills  -->
-	
+
 			<div>
-				<button>
-					Save Profile
-				</button>
+				<button>Save Profile</button>
 			</div>
 
 

@@ -1,36 +1,51 @@
-
-<div class="container" ng-hide="talkers.length"><center><h1><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></h1></center></div>
-<div class="container" ng-show = "talkers.length">
-	<div class="row" >
+<div class="container" ng-hide="showPage">
+	<center>
+		<h1>
+			<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+		</h1>
+	</center>
+</div>
+<div class="container" ng-show="showPage">
+	<div class="row">
 		<div class="col-md-2">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<i class="fa fa-comments fa-1x"></i> Chats 
+					<i class="fa fa-comments fa-1x"></i> Chats
 				</div>
 				<ul class="list-group">
+					<autocomplete ng-model="yourchoice" data="movies"
+						on-type="updateMovies"></autocomplete>
 					<!-- <li class="list-group-item" ng-class="{'text-right highligh-blue': temp == selectedTalker}" ng-repeat="temp in talkers"><span -->
-					<li class="list-group-item"  ng-repeat="temp in talkers"><div ng-class="{'wrapper': temp == selectedTalker}"><span
-						class="pull-left"><strong class=""></strong></span>
-						<span ng-click="getConversation(temp)"  ng-class="{'marquee': temp == selectedTalker, 'marqueePrev': temp != selectedTalker}" >{{temp | capitalize}}</span></div></li>
+					<li class="list-group-item" ng-repeat="temp in talkers">
+						<div ng-class="{'wrapper': temp == selectedTalker}">
+							<span class="pull-left"><strong class=""></strong></span> <span
+								ng-click="getConversation(temp)"
+								ng-class="{'marquee': temp == selectedTalker, 'marqueePrev': temp != selectedTalker}">{{temp
+								| capitalize}}</span>
+						</div>
+					</li>
 				</ul>
 			</div>
 		</div>
 		<div class="col-md-10">
 			<div class="chats">
-			<div ng-hide="message.length"><i class="fa fa-spinner fa-spin fa-1x fa-fw"></i> Loading chats...</div>
-				<div ng-repeat="x in message" ng-show="message">
+				<div ng-hide="gotMessage">
+					<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i> Loading chats...
+				</div>
+				<div ng-repeat="x in message" ng-if="message.length">
 					<div ng-if="user1 != x.to" style="overflow: auto;">
 						<div class="textChipRight">
-							<span>{{x.text}}</span> <a ng-href='./#/profile/{{user1}}'><img class="my-picture"
-									src="{{baseURLImages}}/{{user1}}.jpg"
-									alt="image"> </a>
+							<span>{{x.text}}</span> <a ng-href='./#/profile/{{user1}}'><img
+								class="my-picture" ng-src="{{baseURLImages}}/{{user1}}.jpg"
+								fallback-src={{defaultImageURL}} alt="image"> </a>
 						</div>
 					</div>
 					<div ng-if="user2 != x.to" style="overflow: auto;">
 						<div class="textChipLeft">
-							<span>{{x.text}}</span> <a ng-href='./#/profile/{{user2}}'><img class="my-picture"
-									ng-src='{{baseURLImages}}/{{user2}}.jpg'
-									alt="{{tutor | capitalize}}"> </a>
+							<span>{{x.text}}</span> <a ng-href='./#/profile/{{user2}}'><img
+								class="my-picture" ng-src='{{baseURLImages}}/{{user2}}.jpg'
+								fallback-src={{defaultImageURL}} alt="{{tutor | capitalize}}">
+							</a>
 						</div>
 					</div>
 				</div>
@@ -41,8 +56,8 @@
 					<input type="text" class="form-control" style="border-radius: 0;"
 						placeholder="Type your message..." ng-model="inputText"> <span
 						class="input-group-btn">
-						<button class="btn btn-default" ng-click="sendMessage()" style="border-radius: 0;"
-							type="button">
+						<button class="btn btn-default" ng-click="sendMessage()"
+							style="border-radius: 0;" type="button">
 							<i class="fa fa-paper-plane fa-1x"></i> <b>Send</b>
 						</button>
 					</span>

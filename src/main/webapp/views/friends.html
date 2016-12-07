@@ -7,6 +7,7 @@
 			<div class="friendCard" ng-repeat="x in friendsDetail">
 				<a ng-href="#/profile/{{x.userName}}"> <img
 					ng-src='http://saumeel.com/295Project/ProfileImages/{{x.userName}}.jpg'
+					fallback-src={{defaultImageURL}}
 					alt="">
 				</a>
 
