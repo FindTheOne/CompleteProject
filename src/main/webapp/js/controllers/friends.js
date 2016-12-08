@@ -7,7 +7,7 @@ myApp.controller("FriendsController", function($scope, $http, $window, $rootScop
 		$location.path('./#/login');
 	}else{
 		$rootScope.loggedInUser = fc.currentUser;
-		var username = $rootScope.loggedInUser;
+		var username = $rootScope.loggedInUser.userName;
 
 		var method = "GET";
 		var url = constants.baseURL+"/rest/user/"+username+"/friends";

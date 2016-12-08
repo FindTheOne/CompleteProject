@@ -34,7 +34,7 @@ myApp.controller("InboxController", function($rootScope, $scope, $http, $window,
 
 	$scope.getConversation = function(str){
 		$scope.selectedTalker = str;
-		$scope.user1 = $rootScope.loggedInUser;
+		$scope.user1 = $rootScope.loggedInUser.userName;
 		$scope.user2 = str;
 		$scope.message = [];
 		var method = "GET";
@@ -57,7 +57,7 @@ myApp.controller("InboxController", function($rootScope, $scope, $http, $window,
 
 	var getTalkers = function(){
 		var method = "GET";
-		var url = constants.baseURL+"/rest/getUsersWithWhomHadConversation/"+$rootScope.loggedInUser;
+		var url = constants.baseURL+"/rest/getUsersWithWhomHadConversation/"+$rootScope.loggedInUser.userName;
 
 		$http({
 			method : method,  
@@ -107,13 +107,11 @@ myApp.controller("InboxController", function($rootScope, $scope, $http, $window,
 		$location.path('./#/login');
 	}else{
 
-		ic.currentUser = $window.localStorage.currentUser;
+		ic.currentUser = angular.fromJson($window.localStorage.currentUser);
 		console.log("else...");
 		$rootScope.loggedInUser = ic.currentUser;
 		console.log($rootScope.loggedInUser);
 		$scope.baseURLImages = constants.baseURLImages;
-		$scope.username = "";
-		$scope.password = "";
 
 		$scope.talkers = [];
 		getTalkers();

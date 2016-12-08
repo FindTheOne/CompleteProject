@@ -35,17 +35,22 @@
 <script src="js/constant.js"></script>
 
 <!-- photo upload -->
-  <script src="js/lib/photoUpload/bower_components/lodash/lodash.js"></script>
-  <script src="js/lib/photoUpload/bower_components/cloudinary-core/cloudinary-core.js"></script>
-  <!-- angular file upload -->
-  <script src="js/lib/photoUpload/bower_components/ng-file-upload/ng-file-upload-shim.js"></script>
-  <!-- angular dependencies -->
- 
- <script src="js/lib/photoUpload/bower_components/angular-resource/angular-resource.js"></script>
-  <!-- cloudinary angular plugin -->
-  <script src="js/lib/photoUpload/bower_components/cloudinary_ng/js/angular.cloudinary.js"></script>
-  <!-- angular file upload -->
-  <script src="js/lib/photoUpload/bower_components/ng-file-upload/ng-file-upload.js"></script> 
+<script src="js/lib/photoUpload/bower_components/lodash/lodash.js"></script>
+<script
+	src="js/lib/photoUpload/bower_components/cloudinary-core/cloudinary-core.js"></script>
+<!-- angular file upload -->
+<script
+	src="js/lib/photoUpload/bower_components/ng-file-upload/ng-file-upload-shim.js"></script>
+<!-- angular dependencies -->
+
+<script
+	src="js/lib/photoUpload/bower_components/angular-resource/angular-resource.js"></script>
+<!-- cloudinary angular plugin -->
+<script
+	src="js/lib/photoUpload/bower_components/cloudinary_ng/js/angular.cloudinary.js"></script>
+<!-- angular file upload -->
+<script
+	src="js/lib/photoUpload/bower_components/ng-file-upload/ng-file-upload.js"></script>
 <!-- photo upload -->
 
 <script src="js/controllers/success.js"></script>
@@ -93,8 +98,8 @@
 					<li><a ng-href="./#/friends">Friends</a></li>
 					<li><a ng-href="./#/inbox">Messages</a></li>
 					<li><a ng-href="./#/signout">Log Out</a></li>
-					<li><a ng-href="./#/profile/{{loggedInUser}}">{{loggedInUser
-							| capitalize}}<span class="sr-only">(current)</span>
+					<li><a ng-href="./#/profile/{{loggedInUser.userName}}">{{loggedInUser.firstName}}<span
+							class="sr-only">(current)</span>
 					</a></li>
 				</ul>
 			</div>

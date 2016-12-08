@@ -5,20 +5,20 @@ myApp.controller("DashboardController", function($scope, $http, $window, $locati
 	$scope.baseURLImages = constants.baseURLImages;
 	$scope.defaultImageURL = constants.defaultImageURL;
 	var dc = this;
-	dc.currentUser = $window.localStorage.currentUser;
+	dc.currentUser = angular.fromJson($window.localStorage.currentUser);
 
 	if(!dc.currentUser){
 		console.log("if");
 		$location.path('./#/login');
 	}else{
-
+		
 		$rootScope.loggedInUser = dc.currentUser;
 		$scope.currentUser = dc.currentUser;
 		$scope.coursesLength = 0;
 		$scope.feedLength = 0;
 		$scope.tutorsLength = 0;
 
-		var username = $rootScope.loggedInUser;
+		var username = $rootScope.loggedInUser.userName;
 
 		var courseRecommendationURL = constants.baseURL+"/rest/courseRecommendation/"+username;
 		var hybridRecommendationURL = constants.baseURL+"/rest/hybridRecommendation/"+username;

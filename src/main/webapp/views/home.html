@@ -3,15 +3,15 @@
 	<div class="page-header">
 		<div class="media">
 			<div class="media-left">
-				<a ng-href="./#/profile/{{currentUser}}"> <img
+				<a ng-href="./#/profile/{{currentUser.userName}}"> <img
 					class="img-circle"
-					ng-src="{{baseURLImages}}/{{currentUser}}"
+					ng-src="{{baseURLImages}}/{{currentUser.photoURL}}"
 					fallback-src={{defaultImageURL}}
 					style="height: 70px; width: 70px">
 				</a>
 			</div>
 			<div class="media-body media-middle">
-				<h3 class="media-heading">{{currentUser | capitalize}}, Let's
+				<h3 class="media-heading">{{currentUser.firstName}}, Let's
 					learn something new today !!</h3>
 			</div>
 		</div>
