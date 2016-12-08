@@ -15,6 +15,7 @@ public class User {
 	private String location;
 	private String firstName;
 	private String lastName;
+	private String photoURL;
 	private int sessionGiven;
 	private int sessionTaken;
 	
@@ -116,6 +117,14 @@ public class User {
 	}
 	public void setFriends(String friends) {
 		this.friends = friends;
+	}
+
+	public String getPhotoURL() {
+		return photoURL;
+	}
+
+	public void setPhotoURL(String photoURL) {
+		this.photoURL = photoURL;
 	}
 	
 }

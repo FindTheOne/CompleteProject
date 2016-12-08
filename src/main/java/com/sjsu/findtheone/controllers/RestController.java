@@ -91,6 +91,7 @@ public class RestController {
 		map.put(Constant.UserQuery.major, user.getMajor());
 		map.put(Constant.UserQuery.sessionGiven, user.getSessionGiven());
 		map.put(Constant.UserQuery.sessionTaken, user.getSessionTaken());
+		map.put(Constant.UserQuery.photoURL, user.getPhotoURL());
 		
 		String interestList[] = trim(user.getInterests().split(Constant.COMMA));
 		map.put(Constant.UserQuery.interests, interestList);

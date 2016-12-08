@@ -5,7 +5,7 @@
 			<div class="media-left">
 				<a ng-href="./#/profile/{{currentUser}}"> <img
 					class="img-circle"
-					ng-src="{{baseURLImages}}/{{currentUser}}.jpg"
+					ng-src="{{baseURLImages}}/{{currentUser}}"
 					fallback-src={{defaultImageURL}}
 					style="height: 70px; width: 70px">
 				</a>
@@ -36,7 +36,7 @@
 					<div class="tutor-card">
 						<p class="image-cropper-large">
 							<a ng-href='./#/profile/{{x.teacher}}'><img
-								class="my-picture" src="{{baseURLImages}}/{{x.teacher}}.jpg"
+								class="my-picture" src="{{baseURLImages}}/{{x.teacher}}"
 								fallback-src={{defaultImageURL}} alt="{{tutor | capitalize}}">
 							</a>
 						</p>
@@ -120,7 +120,7 @@
 						<div ng-show="x.tutors.length" ng-repeat="tutor in x.tutors"
 							style="display: inline-block;">
 							<div class="image-cropper-small">
-								<a ng-href='/#/profile/{{tutor}}'><img class="my-picture"
+								<a ng-href='./#/profile/{{tutor}}'><img class="my-picture"
 									src="{{baseURLImages}}/{{tutor}}.jpg"
 									fallback-src={{defaultImageURL}} alt="{{tutor | capitalize}}">
 								</a>

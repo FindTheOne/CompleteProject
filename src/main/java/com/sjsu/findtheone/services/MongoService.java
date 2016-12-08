@@ -7,14 +7,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-
-import javax.json.JsonObject;
-
-import org.apache.tomcat.dbcp.dbcp.DbcpException;
-import org.apache.tomcat.util.bcel.Const;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -34,7 +28,6 @@ public class MongoService {
 	public DBCollection conversationCollection;
 
 	public DBObject currentUser;
-	public static String username = "nikita";
 
 	//comment
 	public MongoService(){
@@ -129,10 +122,10 @@ public class MongoService {
 		String userInterests = getInterests(userName);
 		List<String> userInterestsList = Arrays.asList(parseList(userInterests));
 
-		System.out.println("Userinterests of "+username+" are : "+userInterests);
+		System.out.println("Userinterests of "+userName+" are : "+userInterests);
 		String friends = getFriends(userName);
 		String[] friendsList = parseList(friends);
-		System.out.println("friends of "+username+" are : "+friends);
+		System.out.println("friends of "+userName+" are : "+friends);
 
 		List<String> result = new ArrayList<>();
 

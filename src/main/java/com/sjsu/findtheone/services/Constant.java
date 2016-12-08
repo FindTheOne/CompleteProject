@@ -48,6 +48,7 @@ public class Constant {
 		public static String description = "description";
 		public static String sessionGiven = "sessionGiven";
 		public static String sessionTaken = "sessionTaken";
+		public static String photoURL = "photoURL";
 		
 		public static String replaceRegex = "[\\[\\]\\s\"]";
 		public static String emptyString = "";

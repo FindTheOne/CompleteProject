@@ -15,7 +15,7 @@
 			<h1 class="">{{user.firstName}}</h1>
 
 			<a ng-hide="loggedInUser==user.userName" ng-href="./#/inbox">
-				<button type="button" class="btn btn-info">Send me a
+				<button type="button" class="btn btn-info">Send a
 					message</button>
 			</a> <a ng-show="loggedInUser==user.userName" ng-href="./#/inbox">
 				<button type="button" class="btn btn-info">Edit Profile</button>
@@ -25,7 +25,7 @@
 		<div class="col-sm-2">
 			<a ng-href="./#/profile/{{user.userName}}" class="pull-right"><img
 				title="profile image" class="img-circle img-responsive"
-				ng-src="{{baseURLImages}}/{{user.userName}}.jpg"
+				ng-src="{{baseURLImages}}/{{user.photoURL}}"
 				fallback-src={{defaultImageURL}}></a>
 		</div>
 	</div>
@@ -79,7 +79,7 @@
 					<i class="fa fa-wpexplorer fa-1x"></i> {{user.firstName}}
 					{{user.lastName}}'s Bio
 				</div>
-				<div class="panel-body">Engineer, Coder !!</div>
+				<div class="panel-body">{{user.description}}</div>
 			</div>
 
 			<!-- Friends -->
@@ -90,13 +90,13 @@
 				</div>
 				<div class="panel-body">
 					<div class="row">
-						<div class="col-md-4" ng-repeat="friend in user.friends">
+						<div class="col-md-4" ng-repeat="friend in friends">
 							<div class="image-cropper-small">
-								<a ng-href='./#/profile/{{friend}}'><img class="my-picture"
-									ng-src="{{baseURLImages}}/{{friend}}.jpg"
-									alt="{{friend | capitalize}}"> </a>
+								<a ng-href='./#/profile/{{friend.userName}}'><img class="my-picture"
+									ng-src="{{baseURLImages}}/{{friend.photoURL}}"
+									alt="{{friend.firstName | capitalize}}" fallback-src={{defaultImageURL}}> </a>
 							</div>
-							<div style="text-align: center; font-weight: bold">{{friend
+							<div style="text-align: center; font-weight: bold">{{friend.firstName
 								| capitalize}}</div>
 						</div>
 					</div>
@@ -135,8 +135,6 @@
 			<div>
 				<button>Save Profile</button>
 			</div>
-
-
 		</div>
 	</div>
 

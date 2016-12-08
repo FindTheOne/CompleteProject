@@ -34,6 +34,20 @@
 <script src="js/app.js"></script>
 <script src="js/constant.js"></script>
 
+<!-- photo upload -->
+  <script src="js/lib/photoUpload/bower_components/lodash/lodash.js"></script>
+  <script src="js/lib/photoUpload/bower_components/cloudinary-core/cloudinary-core.js"></script>
+  <!-- angular file upload -->
+  <script src="js/lib/photoUpload/bower_components/ng-file-upload/ng-file-upload-shim.js"></script>
+  <!-- angular dependencies -->
+ 
+ <script src="js/lib/photoUpload/bower_components/angular-resource/angular-resource.js"></script>
+  <!-- cloudinary angular plugin -->
+  <script src="js/lib/photoUpload/bower_components/cloudinary_ng/js/angular.cloudinary.js"></script>
+  <!-- angular file upload -->
+  <script src="js/lib/photoUpload/bower_components/ng-file-upload/ng-file-upload.js"></script> 
+<!-- photo upload -->
+
 <script src="js/controllers/success.js"></script>
 <script src="js/controllers/inbox.js"></script>
 <script src="js/controllers/createUser.js"></script>

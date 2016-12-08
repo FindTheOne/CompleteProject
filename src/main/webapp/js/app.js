@@ -1,6 +1,7 @@
-var myApp = angular.module('myApp', ['ngRoute', 'slick','autocomplete']);
+var myApp = angular.module('myApp', ['ngRoute', 'slick','autocomplete','cloudinary','ngFileUpload']);
 myApp.config(['$routeProvider', '$locationProvider',function($routeProvider, $locationProvider) {
 
+	//'$routeParams', '$location', 'Upload', 'cloudinary'
 	/**to remove hash in the URL**/
 //	$locationProvider.html5Mode({
 //	enabled : true,
@@ -66,56 +67,55 @@ myApp.directive('fallbackSrc', function () {
 
 
 
- myApp.directive('uniqueEmail', uniqueEmail);
+myApp.directive('uniqueEmail', uniqueEmail);
 
-  /** @ngInject */
-  function uniqueEmail($http) {
-    return {
-        restrict: 'A',
-        require: 'ngModel',
-        link: function(scope, element, attrs, ngModel) {
-          element.bind('blur', function() {
-            if (ngModel.$modelValue) {
-            	$http({
-    				method : 'GET',
-    				url : constants.baseURL+"/rest/doesAttributeExist/emailID/"+ngModel.$modelValue,
-    				data : []
-    			}).success(function(data) {
-                ngModel.$setValidity('unique', !data.result);
-              });
-            }
-          });
-          element.bind('keyup', function() {
-            ngModel.$setValidity('unique', true);
-          });
-        }
-    };
-  }
-  
-  
-  myApp.directive('uniqueUsername', uniqueUserName);
+/** @ngInject */
+function uniqueEmail($http) {
+	return {
+		restrict: 'A',
+		require: 'ngModel',
+		link: function(scope, element, attrs, ngModel) {
+			element.bind('blur', function() {
+				if (ngModel.$modelValue) {
+					$http({
+						method : 'GET',
+						url : constants.baseURL+"/rest/doesAttributeExist/emailID/"+ngModel.$modelValue,
+						data : []
+					}).success(function(data) {
+						ngModel.$setValidity('unique', !data.result);
+					});
+				}
+			});
+			element.bind('keyup', function() {
+				ngModel.$setValidity('unique', true);
+			});
+		}
+	};
+}
 
-  /** @ngInject */
-  function uniqueUserName($http) {
-    return {
-        restrict: 'A',
-        require: 'ngModel',
-        link: function(scope, element, attrs, ngModel) {
-          element.bind('blur', function() {
-            if (ngModel.$modelValue) {
-            	$http({
-    				method : 'GET',
-    				url : constants.baseURL+"/rest/doesAttributeExist/userName/"+ngModel.$modelValue,
-    				data : []
-    			}).success(function(data) {
-                ngModel.$setValidity('unique', !data.result);
-              });
-            }
-          });
-          element.bind('keyup', function() {
-            ngModel.$setValidity('unique', true);
-          });
-        }
-    };
-  }
-  
+
+myApp.directive('uniqueUsername', uniqueUserName);
+
+/** @ngInject */
+function uniqueUserName($http) {
+	return {
+		restrict: 'A',
+		require: 'ngModel',
+		link: function(scope, element, attrs, ngModel) {
+			element.bind('blur', function() {
+				if (ngModel.$modelValue) {
+					$http({
+						method : 'GET',
+						url : constants.baseURL+"/rest/doesAttributeExist/userName/"+ngModel.$modelValue,
+						data : []
+					}).success(function(data) {
+						ngModel.$setValidity('unique', !data.result);
+					});
+				}
+			});
+			element.bind('keyup', function() {
+				ngModel.$setValidity('unique', true);
+			});
+		}
+	};
+}
