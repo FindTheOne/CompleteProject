@@ -3,7 +3,6 @@ myApp.controller("InboxController", function($rootScope, $scope, $http, $window,
 	console.log("inbox js");
 	var ic = this;
 
-
 	$scope.sendMessage = function(){
 		var newMessage = {};
 		newMessage.to = $scope.user2;
@@ -58,7 +57,6 @@ myApp.controller("InboxController", function($rootScope, $scope, $http, $window,
 	var getTalkers = function(){
 		var method = "GET";
 		var url = constants.baseURL+"/rest/getUsersWithWhomHadConversation/"+$rootScope.loggedInUser.userName;
-
 		$http({
 			method : method,  
 			url : url
@@ -116,12 +114,5 @@ myApp.controller("InboxController", function($rootScope, $scope, $http, $window,
 		$scope.talkers = [];
 		getTalkers();
 		console.log($scope.talkers);
-
-		//call to get talkers
-//		$scope.talkers = ["saumeel", "pavan", "john"];
-
-
 	}
-
-
 });

@@ -14,6 +14,12 @@
 <link
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet">
+<link
+	href="https://cdn.rawgit.com/angular-ui/bootstrap-bower/master/ui-bootstrap-csp.css"
+	rel="stylesheet">
+<link
+	href="https://cdn.rawgit.com/mohbasheer/angular-chips/master/dist/main.css"
+	rel="stylesheet">
 
 <link href="css/style.css" rel="stylesheet">
 <script
@@ -52,6 +58,15 @@
 <script
 	src="js/lib/photoUpload/bower_components/ng-file-upload/ng-file-upload.js"></script>
 <!-- photo upload -->
+
+<!-- Chips -->
+<script
+	src="https://cdn.rawgit.com/mohbasheer/angular-chips/master/dist/angular-chips.min.js"></script>
+<script
+	src="https://cdn.rawgit.com/angular-ui/bootstrap-bower/master/ui-bootstrap.js"></script>
+<script
+	src="https://cdn.rawgit.com/angular-ui/bootstrap-bower/master/ui-bootstrap-tpls.js"></script>
+
 
 <script src="js/controllers/success.js"></script>
 <script src="js/controllers/inbox.js"></script>

@@ -48,8 +48,8 @@
 				<div class="form-group"
 					ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
 					<label for="username">Username</label> <input unique-username
-						type="text" name="username" id="username" class="form-control"
-						ng-model="vm.user.username" required /> <span
+						lowercased type="text" name="username" id="username"
+						class="form-control" ng-model="vm.user.username" required /> <span
 						ng-show="form.username.$dirty && form.username.$error.required "
 						class="help-block">Username is required</span> <span
 						ng-show=" form.username.$error.unique && !form.username.$error.required"
@@ -96,21 +96,28 @@
 				<div class="form-group">
 					<label for="friends">Friends</label> <input type="text"
 						name="friends" id="friends" class="form-control"
-						ng-model="vm.user.friends" />
+						ng-model="vm.user.friends" lowercased />
 				</div>
 				<div class="form-group">
-					<label for="skills">Skills</label> <input type="text" name="skills"
-						id="skills" class="form-control" ng-model="vm.user.skills" />
+					<label for="skills">Skills</label>
+					<chips ng-model="vm.skills"> <chip-tmpl>
+					<div class="default-chip">
+						{{chip}} <span class="glyphicon glyphicon-remove" remove-chip></span>
+					</div>
+					</chip-tmpl> <input ng-model-control ng-model="typeaheadmodel"
+						uib-typeahead="company for company in vm.courses | filter:$viewValue"></input>
+					</chips>
 				</div>
 				<div class="form-group">
-					<label for="interests">Interests</label> <input type="text"
-						name="interests" id="interests" class="form-control"
-						ng-model="vm.user.interests" />
+					<label for="interests">Interests</label>
+					<chips ng-model="vm.interests"> <chip-tmpl>
+					<div class="default-chip">
+						{{chip}} <span class="glyphicon glyphicon-remove" remove-chip></span>
+					</div>
+					</chip-tmpl> <input ng-model-control ng-model="typeaheadmodel"
+						uib-typeahead="company for company in vm.courses | filter:$viewValue"></input>
+					</chips>
 				</div>
-				<!-- <div class="form-group">
-					<label for="photo">Upload your photo</label> <input type="file"
-						name="photo" id="photo" class="form-control" ng-model="" />
-				</div> -->
 				<div class="form-group" id="direct_upload" ng-model="files">
 					<label for="photo">Upload your Photo</label>
 					<div href="#" class="upload_button" style="height: 30px;"

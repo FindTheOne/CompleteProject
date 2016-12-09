@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'slick','autocomplete','cloudinary','ngFileUpload']);
+var myApp = angular.module('myApp', ['ngRoute', 'slick','autocomplete','cloudinary','ngFileUpload', 'angular.chips','ui.bootstrap']);
 myApp.config(['$routeProvider', '$locationProvider',function($routeProvider, $locationProvider) {
 
 	//'$routeParams', '$location', 'Upload', 'cloudinary'
@@ -65,6 +65,33 @@ myApp.directive('fallbackSrc', function () {
 	return fallbackSrc;
 });
 
+//lowercase
+myApp.directive('lowercased', function() {
+ return {
+     require: 'ngModel',        
+     link: function(scope, element, attrs, modelCtrl) {
+         modelCtrl.$parsers.push(function(input) {
+             return input ? input.toLowerCase() : "";
+         });
+         element.css("text-transform","lowercase");
+     }
+ };
+});
+//lowercase
+
+//uppercase
+myApp.directive('uppercased', function() {
+ return {
+     require: 'ngModel',        
+     link: function(scope, element, attrs, modelCtrl) {
+         modelCtrl.$parsers.push(function(input) {
+             return input ? input.toLowerCase() : "";
+         });
+         element.css("text-transform","uppercase");
+     }
+ };
+});
+//uppercase
 
 
 myApp.directive('uniqueEmail', uniqueEmail);

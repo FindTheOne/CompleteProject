@@ -11,6 +11,8 @@ myApp.controller("SignupController", function($scope, $http, $window, $routePara
 	vm.submitDetails = function() {
 		console.log("registering user : "+angular.toJson(vm.user));
 
+//		for(int i=0;i<)
+		
 		var method = "POST";
 		var url = constants.baseURL+"/rest/create/user";
 
@@ -31,11 +33,11 @@ myApp.controller("SignupController", function($scope, $http, $window, $routePara
 		console.log("response message: "+ response.data.Message);
 	} 
 
-	
+
 	$scope.uploadFiles = function(files){
 		var d = new Date();
 		var imageSalt = d.getDate() +""+  d.getHours() +""+ d.getMinutes() + "" + d.getSeconds();
-		
+
 		angular.forEach(files, function(file){
 			if (file && !file.$error) {
 				file.upload = Upload.upload({
@@ -59,6 +61,24 @@ myApp.controller("SignupController", function($scope, $http, $window, $routePara
 			}
 		});
 	};
+
+	vm.skills = [];
+	vm.interests = ["CS50", "CMPE273"];
+
+	vm.courses = 
+		[
+"CMPE273", 
+"CMPE226", 
+"CMPE275", 
+"CS50", 
+"CMPE280", 
+"CMPE272", 
+"CMPE239", 
+"CMPE235", 
+"CMPE202", 
+"CMPE287", 
+"CMPE281", 
+"CMPE283"];
 
 
 });

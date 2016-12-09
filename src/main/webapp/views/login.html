@@ -2,27 +2,31 @@
 
 <div class="container">
 
-  <form class="form-signin" name="myform"
-    novalidate 
-    ng-submit="login()">
+	<form class="form-signin" name="myform" novalidate ng-submit="login()">
 
-    <h2 class="form-signin-heading">Please sign in</h2>
+		<h2 class="form-signin-heading">Please sign in</h2>
 
-    <fieldset>
-      <label for="inputUserName" class="sr-only">Email address</label>
-      <input type="username" name="username" id="username"
-      ng-model="form.username" ng-required="true"
-      class="form-control" placeholder="username">
-      
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" name="password" id="inputPassword" placeholder="Password"
-      ng-model="form.password" ng-required="true"
-      class="form-control" placeholder="Password">
-      <p class="error validationerror"
-      ng-show="myform.password.$invalid && myform.password.$touched">Password can't be empty</p>
-    </fieldset>
+		<fieldset>
+			<label for="inputUserName" class="sr-only">User name</label> <input
+				type="username" name="username" id="username"
+				ng-model="form.username" ng-required="true" class="form-control"
+				placeholder="username" lowercased> <label
+				for="inputPassword" class="sr-only">Password</label> <input
+				type="password" name="password" id="inputPassword"
+				placeholder="Password" ng-model="form.password" ng-required="true"
+				class="form-control" placeholder="Password"> <span
+				class="error validationerror">{{errorMessage}}</span>
+			<p class="error validationerror"
+				ng-show="myform.password.$invalid && myform.password.$touched">Password
+				can't be empty</p>
 
-    <button type="submit" class="btn btn-lg btn-primary btn-block" ng-disabled="myform.$invalid">Login</button>
-    <p>or <a href="./#/signup">register</a></p>
-  </form>
+		</fieldset>
+
+		<button type="submit" class="btn btn-lg btn-primary btn-block"
+			ng-disabled="myform.$invalid">Login</button>
+		<p>
+			or <a href="./#/signup">register</a>
+		</p>
+	</form>
+
 </div>

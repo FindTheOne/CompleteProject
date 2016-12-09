@@ -34,7 +34,8 @@ myApp.controller("LoginController", function($rootScope, $http, $location, $scop
 	}
 	function _error(response){
 		console.log(response.data.Message); // incorrect credentials
-		$window.location.assign('./#/login');
+		$scope.errorMessage = response.data.Message;
+//		$window.location.assign('./#/login');
 	}
 
 });
