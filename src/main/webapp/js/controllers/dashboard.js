@@ -11,7 +11,7 @@ myApp.controller("DashboardController", function($scope, $http, $window, $locati
 		console.log("if");
 		$location.path('./#/login');
 	}else{
-		
+
 		$rootScope.loggedInUser = dc.currentUser;
 		$scope.currentUser = dc.currentUser;
 		$scope.coursesLength = 0;

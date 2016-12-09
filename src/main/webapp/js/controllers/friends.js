@@ -1,7 +1,7 @@
 myApp.controller("FriendsController", function($scope, $http, $window, $rootScope) {
 
 	var fc = this;
-	fc.currentUser = $window.localStorage.currentUser;
+	fc.currentUser = angular.fromJson($window.localStorage.currentUser);
 
 	if(!fc.currentUser){
 		$location.path('./#/login');

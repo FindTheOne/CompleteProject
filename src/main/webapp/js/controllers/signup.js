@@ -10,19 +10,30 @@ myApp.controller("SignupController", function($scope, $http, $window, $routePara
 
 	vm.submitDetails = function() {
 		console.log("registering user : "+angular.toJson(vm.user));
+//		vm.user.skills = "";
+//		vm.user.interests = "";
+		for(var i=0;i<vm.skills.length;i++){
+			vm.user.skills += vm.skills[i];
+			if(i<vm.skills.length-1)
+				vm.user.skills += ",";
+		}
+		for(var i=0;i<vm.interests.length;i++){
+			vm.user.interests+=vm.interests[i];
+			if(i<vm.interests.length-1)
+				vm.user.interests += ",";
+		}
 
-//		for(int i=0;i<)
-		
+		console.log(angular.toJson(vm.user));
 		var method = "POST";
+		
 		var url = constants.baseURL+"/rest/create/user";
-
 		$http({  
-			method : method,  
-			url : url,  
-			data : angular.toJson(vm.user),
-			headers : {  
-				'Content-Type' : 'application/json'
-			}  
+		method : method,  
+		url : url,  
+		data : angular.toJson(vm.user),
+		headers : {  
+		'Content-Type' : 'application/json'
+		}  
 		}).then( _success);  
 	}
 
@@ -79,6 +90,5 @@ myApp.controller("SignupController", function($scope, $http, $window, $routePara
 "CMPE287", 
 "CMPE281", 
 "CMPE283"];
-
 
 });
